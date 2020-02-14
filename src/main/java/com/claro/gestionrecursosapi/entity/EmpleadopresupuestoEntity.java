@@ -1,0 +1,97 @@
+package com.claro.gestionrecursosapi.entity;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+/**
+ * The persistent class for the empleadopresupuesto database table.
+ * 
+ */
+@Entity
+@Table(name="empleadopresupuesto")
+@NamedQuery(name="EmpleadopresupuestoEntity.findAll", query="SELECT e FROM EmpleadopresupuestoEntity e")
+public class EmpleadopresupuestoEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+
+	private Timestamp fechacreacion;
+
+	private Timestamp fechamodificacion;
+
+	private String nombre;
+
+	//bi-directional many-to-one association to EmpleadoEntity
+	@OneToMany(mappedBy="empleadopresupuesto")
+	private List<EmpleadoEntity> empleados;
+
+	public EmpleadopresupuestoEntity() {
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Timestamp getFechacreacion() {
+		return this.fechacreacion;
+	}
+
+	public void setFechacreacion(Timestamp fechacreacion) {
+		this.fechacreacion = fechacreacion;
+	}
+
+	public Timestamp getFechamodificacion() {
+		return this.fechamodificacion;
+	}
+
+	public void setFechamodificacion(Timestamp fechamodificacion) {
+		this.fechamodificacion = fechamodificacion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public List<EmpleadoEntity> getEmpleados() {
+		return this.empleados;
+	}
+
+	public void setEmpleados(List<EmpleadoEntity> empleados) {
+		this.empleados = empleados;
+	}
+
+	public EmpleadoEntity addEmpleado(EmpleadoEntity empleado) {
+		getEmpleados().add(empleado);
+		empleado.setEmpleadopresupuesto(this);
+
+		return empleado;
+	}
+
+	public EmpleadoEntity removeEmpleado(EmpleadoEntity empleado) {
+		getEmpleados().remove(empleado);
+		empleado.setEmpleadopresupuesto(null);
+
+		return empleado;
+	}
+
+}
