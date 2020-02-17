@@ -35,10 +35,6 @@ public class EstructuratipoEntity implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to EstructuraorganizacionalEntity
-	@OneToMany(mappedBy="estructuratipo")
-	private List<EstructuraorganizacionalEntity> estructuraorganizacionals;
-
 	public EstructuratipoEntity() {
 	}
 
@@ -80,28 +76,6 @@ public class EstructuratipoEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<EstructuraorganizacionalEntity> getEstructuraorganizacionals() {
-		return this.estructuraorganizacionals;
-	}
-
-	public void setEstructuraorganizacionals(List<EstructuraorganizacionalEntity> estructuraorganizacionals) {
-		this.estructuraorganizacionals = estructuraorganizacionals;
-	}
-
-	public EstructuraorganizacionalEntity addEstructuraorganizacional(EstructuraorganizacionalEntity estructuraorganizacional) {
-		getEstructuraorganizacionals().add(estructuraorganizacional);
-		estructuraorganizacional.setEstructuratipo(this);
-
-		return estructuraorganizacional;
-	}
-
-	public EstructuraorganizacionalEntity removeEstructuraorganizacional(EstructuraorganizacionalEntity estructuraorganizacional) {
-		getEstructuraorganizacionals().remove(estructuraorganizacional);
-		estructuraorganizacional.setEstructuratipo(null);
-
-		return estructuraorganizacional;
 	}
 
 }

@@ -33,10 +33,6 @@ public class PersonaausenciatipoEntity implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to PersonaausenciaEntity
-	@OneToMany(mappedBy="personaausenciatipo")
-	private List<PersonaausenciaEntity> personaausencias;
-
 	public PersonaausenciatipoEntity() {
 	}
 
@@ -70,28 +66,6 @@ public class PersonaausenciatipoEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<PersonaausenciaEntity> getPersonaausencias() {
-		return this.personaausencias;
-	}
-
-	public void setPersonaausencias(List<PersonaausenciaEntity> personaausencias) {
-		this.personaausencias = personaausencias;
-	}
-
-	public PersonaausenciaEntity addPersonaausencia(PersonaausenciaEntity personaausencia) {
-		getPersonaausencias().add(personaausencia);
-		personaausencia.setPersonaausenciatipo(this);
-
-		return personaausencia;
-	}
-
-	public PersonaausenciaEntity removePersonaausencia(PersonaausenciaEntity personaausencia) {
-		getPersonaausencias().remove(personaausencia);
-		personaausencia.setPersonaausenciatipo(null);
-
-		return personaausencia;
 	}
 
 }

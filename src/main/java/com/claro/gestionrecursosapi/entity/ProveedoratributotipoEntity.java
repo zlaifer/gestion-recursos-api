@@ -35,10 +35,6 @@ public class ProveedoratributotipoEntity implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to ProveedoratributoEntity
-	@OneToMany(mappedBy="proveedoratributotipo")
-	private List<ProveedoratributoEntity> proveedoratributos;
-
 	public ProveedoratributotipoEntity() {
 	}
 
@@ -80,28 +76,6 @@ public class ProveedoratributotipoEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<ProveedoratributoEntity> getProveedoratributos() {
-		return this.proveedoratributos;
-	}
-
-	public void setProveedoratributos(List<ProveedoratributoEntity> proveedoratributos) {
-		this.proveedoratributos = proveedoratributos;
-	}
-
-	public ProveedoratributoEntity addProveedoratributo(ProveedoratributoEntity proveedoratributo) {
-		getProveedoratributos().add(proveedoratributo);
-		proveedoratributo.setProveedoratributotipo(this);
-
-		return proveedoratributo;
-	}
-
-	public ProveedoratributoEntity removeProveedoratributo(ProveedoratributoEntity proveedoratributo) {
-		getProveedoratributos().remove(proveedoratributo);
-		proveedoratributo.setProveedoratributotipo(null);
-
-		return proveedoratributo;
 	}
 
 }

@@ -35,18 +35,6 @@ public class PerfilnivelEntity implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to EmpleadoEntity
-	@OneToMany(mappedBy="perfilnivel")
-	private List<EmpleadoEntity> empleados;
-
-	//bi-directional many-to-one association to PerfilcostoEntity
-	@OneToMany(mappedBy="perfilnivel")
-	private List<PerfilcostoEntity> perfilcostos;
-
-	//bi-directional many-to-one association to ProyectosolicitudempleadoEntity
-	@OneToMany(mappedBy="perfilnivel")
-	private List<ProyectosolicitudempleadoEntity> proyectosolicitudempleados;
-
 	public PerfilnivelEntity() {
 	}
 
@@ -88,72 +76,6 @@ public class PerfilnivelEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<EmpleadoEntity> getEmpleados() {
-		return this.empleados;
-	}
-
-	public void setEmpleados(List<EmpleadoEntity> empleados) {
-		this.empleados = empleados;
-	}
-
-	public EmpleadoEntity addEmpleado(EmpleadoEntity empleado) {
-		getEmpleados().add(empleado);
-		empleado.setPerfilnivel(this);
-
-		return empleado;
-	}
-
-	public EmpleadoEntity removeEmpleado(EmpleadoEntity empleado) {
-		getEmpleados().remove(empleado);
-		empleado.setPerfilnivel(null);
-
-		return empleado;
-	}
-
-	public List<PerfilcostoEntity> getPerfilcostos() {
-		return this.perfilcostos;
-	}
-
-	public void setPerfilcostos(List<PerfilcostoEntity> perfilcostos) {
-		this.perfilcostos = perfilcostos;
-	}
-
-	public PerfilcostoEntity addPerfilcosto(PerfilcostoEntity perfilcosto) {
-		getPerfilcostos().add(perfilcosto);
-		perfilcosto.setPerfilnivel(this);
-
-		return perfilcosto;
-	}
-
-	public PerfilcostoEntity removePerfilcosto(PerfilcostoEntity perfilcosto) {
-		getPerfilcostos().remove(perfilcosto);
-		perfilcosto.setPerfilnivel(null);
-
-		return perfilcosto;
-	}
-
-	public List<ProyectosolicitudempleadoEntity> getProyectosolicitudempleados() {
-		return this.proyectosolicitudempleados;
-	}
-
-	public void setProyectosolicitudempleados(List<ProyectosolicitudempleadoEntity> proyectosolicitudempleados) {
-		this.proyectosolicitudempleados = proyectosolicitudempleados;
-	}
-
-	public ProyectosolicitudempleadoEntity addProyectosolicitudempleado(ProyectosolicitudempleadoEntity proyectosolicitudempleado) {
-		getProyectosolicitudempleados().add(proyectosolicitudempleado);
-		proyectosolicitudempleado.setPerfilnivel(this);
-
-		return proyectosolicitudempleado;
-	}
-
-	public ProyectosolicitudempleadoEntity removeProyectosolicitudempleado(ProyectosolicitudempleadoEntity proyectosolicitudempleado) {
-		getProyectosolicitudempleados().remove(proyectosolicitudempleado);
-		proyectosolicitudempleado.setPerfilnivel(null);
-
-		return proyectosolicitudempleado;
 	}
 
 }

@@ -33,10 +33,6 @@ public class EmpleadopresupuestoEntity implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to EmpleadoEntity
-	@OneToMany(mappedBy="empleadopresupuesto")
-	private List<EmpleadoEntity> empleados;
-
 	public EmpleadopresupuestoEntity() {
 	}
 
@@ -70,28 +66,6 @@ public class EmpleadopresupuestoEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<EmpleadoEntity> getEmpleados() {
-		return this.empleados;
-	}
-
-	public void setEmpleados(List<EmpleadoEntity> empleados) {
-		this.empleados = empleados;
-	}
-
-	public EmpleadoEntity addEmpleado(EmpleadoEntity empleado) {
-		getEmpleados().add(empleado);
-		empleado.setEmpleadopresupuesto(this);
-
-		return empleado;
-	}
-
-	public EmpleadoEntity removeEmpleado(EmpleadoEntity empleado) {
-		getEmpleados().remove(empleado);
-		empleado.setEmpleadopresupuesto(null);
-
-		return empleado;
 	}
 
 }

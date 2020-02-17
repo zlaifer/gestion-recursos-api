@@ -57,10 +57,6 @@ public class PresupuestoEntity implements Serializable {
 	@JoinColumn(name="CODEMPLEADOGERENTE")
 	private EmpleadoEntity empleado;
 
-	//bi-directional many-to-one association to ProyectoEntity
-	@OneToMany(mappedBy="presupuesto")
-	private List<ProyectoEntity> proyectos;
-
 	public PresupuestoEntity() {
 	}
 
@@ -142,28 +138,6 @@ public class PresupuestoEntity implements Serializable {
 
 	public void setEmpleado(EmpleadoEntity empleado) {
 		this.empleado = empleado;
-	}
-
-	public List<ProyectoEntity> getProyectos() {
-		return this.proyectos;
-	}
-
-	public void setProyectos(List<ProyectoEntity> proyectos) {
-		this.proyectos = proyectos;
-	}
-
-	public ProyectoEntity addProyecto(ProyectoEntity proyecto) {
-		getProyectos().add(proyecto);
-		proyecto.setPresupuesto(this);
-
-		return proyecto;
-	}
-
-	public ProyectoEntity removeProyecto(ProyectoEntity proyecto) {
-		getProyectos().remove(proyecto);
-		proyecto.setPresupuesto(null);
-
-		return proyecto;
 	}
 
 }

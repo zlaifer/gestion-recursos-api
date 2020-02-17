@@ -48,10 +48,6 @@ public class EmpleadoEntity implements Serializable {
 	@JoinColumn(name="CODEMPLEADOJEFE")
 	private EmpleadoEntity empleado;
 
-	//bi-directional many-to-one association to EmpleadoEntity
-	@OneToMany(mappedBy="empleado")
-	private List<EmpleadoEntity> empleados;
-
 	//bi-directional many-to-one association to EmpleadopresupuestoEntity
 	@ManyToOne
 	@JoinColumn(name="CODEMPLEADOPRESUPUESTO")
@@ -96,22 +92,6 @@ public class EmpleadoEntity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="CODPROVEEDOR")
 	private ProveedorEntity proveedor;
-
-	//bi-directional many-to-one association to EmpleadoasignacionEntity
-	@OneToMany(mappedBy="empleado")
-	private List<EmpleadoasignacionEntity> empleadoasignacions;
-
-	//bi-directional many-to-one association to EmpleadocontrolEntity
-	@OneToMany(mappedBy="empleado")
-	private List<EmpleadocontrolEntity> empleadocontrols;
-
-	//bi-directional many-to-one association to EstructuraorganizacionalEntity
-	@OneToMany(mappedBy="empleado")
-	private List<EstructuraorganizacionalEntity> estructuraorganizacionals;
-
-	//bi-directional many-to-one association to PresupuestoEntity
-	@OneToMany(mappedBy="empleado")
-	private List<PresupuestoEntity> presupuestos;
 
 	public EmpleadoEntity() {
 	}
@@ -170,28 +150,6 @@ public class EmpleadoEntity implements Serializable {
 
 	public void setEmpleado(EmpleadoEntity empleado) {
 		this.empleado = empleado;
-	}
-
-	public List<EmpleadoEntity> getEmpleados() {
-		return this.empleados;
-	}
-
-	public void setEmpleados(List<EmpleadoEntity> empleados) {
-		this.empleados = empleados;
-	}
-
-	public EmpleadoEntity addEmpleado(EmpleadoEntity empleado) {
-		getEmpleados().add(empleado);
-		empleado.setEmpleado(this);
-
-		return empleado;
-	}
-
-	public EmpleadoEntity removeEmpleado(EmpleadoEntity empleado) {
-		getEmpleados().remove(empleado);
-		empleado.setEmpleado(null);
-
-		return empleado;
 	}
 
 	public EmpleadopresupuestoEntity getEmpleadopresupuesto() {
@@ -266,92 +224,5 @@ public class EmpleadoEntity implements Serializable {
 		this.proveedor = proveedor;
 	}
 
-	public List<EmpleadoasignacionEntity> getEmpleadoasignacions() {
-		return this.empleadoasignacions;
-	}
-
-	public void setEmpleadoasignacions(List<EmpleadoasignacionEntity> empleadoasignacions) {
-		this.empleadoasignacions = empleadoasignacions;
-	}
-
-	public EmpleadoasignacionEntity addEmpleadoasignacion(EmpleadoasignacionEntity empleadoasignacion) {
-		getEmpleadoasignacions().add(empleadoasignacion);
-		empleadoasignacion.setEmpleado(this);
-
-		return empleadoasignacion;
-	}
-
-	public EmpleadoasignacionEntity removeEmpleadoasignacion(EmpleadoasignacionEntity empleadoasignacion) {
-		getEmpleadoasignacions().remove(empleadoasignacion);
-		empleadoasignacion.setEmpleado(null);
-
-		return empleadoasignacion;
-	}
-
-	public List<EmpleadocontrolEntity> getEmpleadocontrols() {
-		return this.empleadocontrols;
-	}
-
-	public void setEmpleadocontrols(List<EmpleadocontrolEntity> empleadocontrols) {
-		this.empleadocontrols = empleadocontrols;
-	}
-
-	public EmpleadocontrolEntity addEmpleadocontrol(EmpleadocontrolEntity empleadocontrol) {
-		getEmpleadocontrols().add(empleadocontrol);
-		empleadocontrol.setEmpleado(this);
-
-		return empleadocontrol;
-	}
-
-	public EmpleadocontrolEntity removeEmpleadocontrol(EmpleadocontrolEntity empleadocontrol) {
-		getEmpleadocontrols().remove(empleadocontrol);
-		empleadocontrol.setEmpleado(null);
-
-		return empleadocontrol;
-	}
-
-	public List<EstructuraorganizacionalEntity> getEstructuraorganizacionals() {
-		return this.estructuraorganizacionals;
-	}
-
-	public void setEstructuraorganizacionals(List<EstructuraorganizacionalEntity> estructuraorganizacionals) {
-		this.estructuraorganizacionals = estructuraorganizacionals;
-	}
-
-	public EstructuraorganizacionalEntity addEstructuraorganizacional(EstructuraorganizacionalEntity estructuraorganizacional) {
-		getEstructuraorganizacionals().add(estructuraorganizacional);
-		estructuraorganizacional.setEmpleado(this);
-
-		return estructuraorganizacional;
-	}
-
-	public EstructuraorganizacionalEntity removeEstructuraorganizacional(EstructuraorganizacionalEntity estructuraorganizacional) {
-		getEstructuraorganizacionals().remove(estructuraorganizacional);
-		estructuraorganizacional.setEmpleado(null);
-
-		return estructuraorganizacional;
-	}
-
-	public List<PresupuestoEntity> getPresupuestos() {
-		return this.presupuestos;
-	}
-
-	public void setPresupuestos(List<PresupuestoEntity> presupuestos) {
-		this.presupuestos = presupuestos;
-	}
-
-	public PresupuestoEntity addPresupuesto(PresupuestoEntity presupuesto) {
-		getPresupuestos().add(presupuesto);
-		presupuesto.setEmpleado(this);
-
-		return presupuesto;
-	}
-
-	public PresupuestoEntity removePresupuesto(PresupuestoEntity presupuesto) {
-		getPresupuestos().remove(presupuesto);
-		presupuesto.setEmpleado(null);
-
-		return presupuesto;
-	}
 
 }

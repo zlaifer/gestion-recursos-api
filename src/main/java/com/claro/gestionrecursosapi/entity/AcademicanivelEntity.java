@@ -35,10 +35,6 @@ public class AcademicanivelEntity implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to AcademicaEntity
-	@OneToMany(mappedBy="academicanivel")
-	private List<AcademicaEntity> academicas;
-
 	public AcademicanivelEntity() {
 	}
 
@@ -80,28 +76,6 @@ public class AcademicanivelEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<AcademicaEntity> getAcademicas() {
-		return this.academicas;
-	}
-
-	public void setAcademicas(List<AcademicaEntity> academicas) {
-		this.academicas = academicas;
-	}
-
-	public AcademicaEntity addAcademica(AcademicaEntity academica) {
-		getAcademicas().add(academica);
-		academica.setAcademicanivel(this);
-
-		return academica;
-	}
-
-	public AcademicaEntity removeAcademica(AcademicaEntity academica) {
-		getAcademicas().remove(academica);
-		academica.setAcademicanivel(null);
-
-		return academica;
 	}
 
 }
