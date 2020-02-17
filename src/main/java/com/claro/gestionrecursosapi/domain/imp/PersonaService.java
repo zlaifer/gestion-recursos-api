@@ -11,11 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.claro.gestionrecursosapi.domain.IPersonaService;
 import com.claro.gestionrecursosapi.entity.PersonaEntity;
+import com.claro.gestionrecursosapi.excepcion.DataIncorrectaExcepcion;
+import com.claro.gestionrecursosapi.excepcion.NoExisteExcepcion;
+import com.claro.gestionrecursosapi.excepcion.YaExisteExcepcion;
 import com.claro.gestionrecursosapi.repository.IPersonaRepository;
-
-import excepcion.DataIncorrectaExcepcion;
-import excepcion.NoExisteExcepcion;
-import excepcion.YaExisteExcepcion;
 
 @Service
 @Transactional

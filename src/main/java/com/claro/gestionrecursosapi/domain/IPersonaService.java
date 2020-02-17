@@ -1,10 +1,9 @@
 package com.claro.gestionrecursosapi.domain;
 
 import com.claro.gestionrecursosapi.entity.PersonaEntity;
-
-import excepcion.DataIncorrectaExcepcion;
-import excepcion.NoExisteExcepcion;
-import excepcion.YaExisteExcepcion;
+import com.claro.gestionrecursosapi.excepcion.DataIncorrectaExcepcion;
+import com.claro.gestionrecursosapi.excepcion.NoExisteExcepcion;
+import com.claro.gestionrecursosapi.excepcion.YaExisteExcepcion;
 
 public interface IPersonaService {
 

@@ -1,4 +1,4 @@
-package excepcion;
+package com.claro.gestionrecursosapi.excepcion;
 
 public class NoExisteExcepcion extends Exception {
 
