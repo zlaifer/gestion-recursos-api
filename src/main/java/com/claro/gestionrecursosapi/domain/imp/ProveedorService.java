@@ -1,12 +1,17 @@
-package com.claro.gestionrecursosapi.domain;
+package com.claro.gestionrecursosapi.domain.imp;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
+import com.claro.gestionrecursosapi.domain.ICrudService;
 import com.claro.gestionrecursosapi.entity.ProveedorEntity;
 import com.claro.gestionrecursosapi.repository.IProveedorRepository;
 
+@Service
+@Validated
 public class ProveedorService implements ICrudService<ProveedorEntity, Integer> {
 
 	@Autowired

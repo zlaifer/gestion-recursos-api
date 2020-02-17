@@ -33,22 +33,6 @@ public class PerfiltipoEntity implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to EmpleadoEntity
-	@OneToMany(mappedBy="perfiltipo")
-	private List<EmpleadoEntity> empleados;
-
-	//bi-directional many-to-one association to PerfilcostoEntity
-	@OneToMany(mappedBy="perfiltipo")
-	private List<PerfilcostoEntity> perfilcostos;
-
-	//bi-directional many-to-one association to PerfiltipoPerfilEntity
-	@OneToMany(mappedBy="perfiltipo")
-	private List<PerfiltipoPerfilEntity> perfiltipoPerfils;
-
-	//bi-directional many-to-one association to ProyectosolicitudempleadoEntity
-	@OneToMany(mappedBy="perfiltipo")
-	private List<ProyectosolicitudempleadoEntity> proyectosolicitudempleados;
-
 	public PerfiltipoEntity() {
 	}
 
@@ -82,94 +66,6 @@ public class PerfiltipoEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<EmpleadoEntity> getEmpleados() {
-		return this.empleados;
-	}
-
-	public void setEmpleados(List<EmpleadoEntity> empleados) {
-		this.empleados = empleados;
-	}
-
-	public EmpleadoEntity addEmpleado(EmpleadoEntity empleado) {
-		getEmpleados().add(empleado);
-		empleado.setPerfiltipo(this);
-
-		return empleado;
-	}
-
-	public EmpleadoEntity removeEmpleado(EmpleadoEntity empleado) {
-		getEmpleados().remove(empleado);
-		empleado.setPerfiltipo(null);
-
-		return empleado;
-	}
-
-	public List<PerfilcostoEntity> getPerfilcostos() {
-		return this.perfilcostos;
-	}
-
-	public void setPerfilcostos(List<PerfilcostoEntity> perfilcostos) {
-		this.perfilcostos = perfilcostos;
-	}
-
-	public PerfilcostoEntity addPerfilcosto(PerfilcostoEntity perfilcosto) {
-		getPerfilcostos().add(perfilcosto);
-		perfilcosto.setPerfiltipo(this);
-
-		return perfilcosto;
-	}
-
-	public PerfilcostoEntity removePerfilcosto(PerfilcostoEntity perfilcosto) {
-		getPerfilcostos().remove(perfilcosto);
-		perfilcosto.setPerfiltipo(null);
-
-		return perfilcosto;
-	}
-
-	public List<PerfiltipoPerfilEntity> getPerfiltipoPerfils() {
-		return this.perfiltipoPerfils;
-	}
-
-	public void setPerfiltipoPerfils(List<PerfiltipoPerfilEntity> perfiltipoPerfils) {
-		this.perfiltipoPerfils = perfiltipoPerfils;
-	}
-
-	public PerfiltipoPerfilEntity addPerfiltipoPerfil(PerfiltipoPerfilEntity perfiltipoPerfil) {
-		getPerfiltipoPerfils().add(perfiltipoPerfil);
-		perfiltipoPerfil.setPerfiltipo(this);
-
-		return perfiltipoPerfil;
-	}
-
-	public PerfiltipoPerfilEntity removePerfiltipoPerfil(PerfiltipoPerfilEntity perfiltipoPerfil) {
-		getPerfiltipoPerfils().remove(perfiltipoPerfil);
-		perfiltipoPerfil.setPerfiltipo(null);
-
-		return perfiltipoPerfil;
-	}
-
-	public List<ProyectosolicitudempleadoEntity> getProyectosolicitudempleados() {
-		return this.proyectosolicitudempleados;
-	}
-
-	public void setProyectosolicitudempleados(List<ProyectosolicitudempleadoEntity> proyectosolicitudempleados) {
-		this.proyectosolicitudempleados = proyectosolicitudempleados;
-	}
-
-	public ProyectosolicitudempleadoEntity addProyectosolicitudempleado(ProyectosolicitudempleadoEntity proyectosolicitudempleado) {
-		getProyectosolicitudempleados().add(proyectosolicitudempleado);
-		proyectosolicitudempleado.setPerfiltipo(this);
-
-		return proyectosolicitudempleado;
-	}
-
-	public ProyectosolicitudempleadoEntity removeProyectosolicitudempleado(ProyectosolicitudempleadoEntity proyectosolicitudempleado) {
-		getProyectosolicitudempleados().remove(proyectosolicitudempleado);
-		proyectosolicitudempleado.setPerfiltipo(null);
-
-		return proyectosolicitudempleado;
 	}
 
 }

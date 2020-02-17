@@ -40,7 +40,7 @@ public class PerfilcostoEntity implements Serializable {
 
 	//bi-directional many-to-one association to PerfilEntity
 	@ManyToOne
-	@JoinColumn(name="CODPERFIL")
+	@JoinColumn(name="CODPERFIL", insertable=false, updatable=false)
 	private PerfilEntity perfil;
 
 	//bi-directional many-to-one association to PerfilnivelEntity

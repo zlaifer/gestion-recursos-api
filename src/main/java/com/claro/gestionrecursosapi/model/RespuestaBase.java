@@ -5,6 +5,18 @@ public class RespuestaBase {
 	private int codigoEstatus;
 	private String mensaje;
 	
+	public RespuestaBase(int codigoEstatus, String mensaje) {
+		super();
+		this.codigoEstatus = codigoEstatus;
+		this.mensaje = mensaje;
+	}
+	
+	public RespuestaBase() {
+		super();
+	}
+
+
+
 	public int getCodigoEstatus() {
 		return codigoEstatus;
 	}

@@ -33,10 +33,6 @@ public class HabilidadtipoEntity implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to HabilidadEntity
-	@OneToMany(mappedBy="habilidadtipo")
-	private List<HabilidadEntity> habilidads;
-
 	public HabilidadtipoEntity() {
 	}
 
@@ -70,28 +66,6 @@ public class HabilidadtipoEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<HabilidadEntity> getHabilidads() {
-		return this.habilidads;
-	}
-
-	public void setHabilidads(List<HabilidadEntity> habilidads) {
-		this.habilidads = habilidads;
-	}
-
-	public HabilidadEntity addHabilidad(HabilidadEntity habilidad) {
-		getHabilidads().add(habilidad);
-		habilidad.setHabilidadtipo(this);
-
-		return habilidad;
-	}
-
-	public HabilidadEntity removeHabilidad(HabilidadEntity habilidad) {
-		getHabilidads().remove(habilidad);
-		habilidad.setHabilidadtipo(null);
-
-		return habilidad;
 	}
 
 }

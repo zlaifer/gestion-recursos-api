@@ -12,19 +12,18 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 /**
  * The persistent class for the tipodocumento database table.
  * 
  */
 @Entity
-@Table(name="tipodocumento")
-@NamedQuery(name="TipodocumentoEntity.findAll", query="SELECT t FROM TipodocumentoEntity t")
+@Table(name = "tipodocumento")
+@NamedQuery(name = "TipodocumentoEntity.findAll", query = "SELECT t FROM TipodocumentoEntity t")
 public class TipodocumentoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String descripcion;
@@ -34,10 +33,6 @@ public class TipodocumentoEntity implements Serializable {
 	private Timestamp fechamodificacion;
 
 	private String nombre;
-
-	//bi-directional many-to-one association to PersonaEntity
-	@OneToMany(mappedBy="tipodocumento")
-	private List<PersonaEntity> personas;
 
 	public TipodocumentoEntity() {
 	}
@@ -81,27 +76,5 @@ public class TipodocumentoEntity implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public List<PersonaEntity> getPersonas() {
-		return this.personas;
-	}
-
-	public void setPersonas(List<PersonaEntity> personas) {
-		this.personas = personas;
-	}
-
-//	public PersonaEntity addPersona(PersonaEntity persona) {
-//		getPersonas().add(persona);
-//		persona.setCodtipodocumento(this);
-//
-//		return persona;
-//	}
-//
-//	public PersonaEntity removePersona(PersonaEntity persona) {
-//		getPersonas().remove(persona);
-//		persona.setCodtipodocumento(null);
-//
-//		return persona;
-//	}
 
 }

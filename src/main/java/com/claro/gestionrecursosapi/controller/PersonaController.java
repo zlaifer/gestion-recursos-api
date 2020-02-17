@@ -3,6 +3,7 @@ package com.claro.gestionrecursosapi.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,45 +14,102 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.claro.gestionrecursosapi.domain.PersonaService;
+import com.claro.gestionrecursosapi.domain.IPersonaService;
+import com.claro.gestionrecursosapi.domain.imp.PersonaService;
 import com.claro.gestionrecursosapi.entity.PersonaEntity;
+import com.claro.gestionrecursosapi.model.RespuestaBase;
+import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
+
+import excepcion.DataIncorrectaExcepcion;
+import excepcion.NoExisteExcepcion;
+import excepcion.YaExisteExcepcion;
 
 @RestController
 @RequestMapping("/api/v1/persona")
 public class PersonaController {
 
 	@Autowired
-	private PersonaService service;
-	
+	private IPersonaService service;
+
 	@GetMapping
-	public ResponseEntity<Iterable<PersonaEntity>> GET() {
-		return ResponseEntity.ok(service.findAll());
+	public ResponseEntity<RespuestaBase> buscarTodo() {
+		try {
+			Iterable<PersonaEntity> listasPersonas = service.buscarTodos();
+			RespuestaCustomizada<Iterable<PersonaEntity>> respuesta = new RespuestaCustomizada<>();
+
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(listasPersonas);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
+		}
+
 	}
-	
+
 	@GetMapping("/{id}")
-	public Optional<PersonaEntity> GET(@PathVariable int id) {
-		return service.findById(id);
+	public ResponseEntity<RespuestaBase> buscarPorId(@PathVariable int id) {
+		try {
+			PersonaEntity personaEntity = service.buscarPorId(id);
+			RespuestaCustomizada<PersonaEntity> respuesta = new RespuestaCustomizada<>();
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(personaEntity);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
+		}
 	}
-	
+
 	@PostMapping
-	public PersonaEntity POST(@RequestBody PersonaEntity entity) {
-		return service.save(entity);
+	public ResponseEntity<RespuestaBase> crear(@RequestBody PersonaEntity entity) {
+		try {
+			PersonaEntity personaEntity = service.crear(entity);
+			RespuestaCustomizada<PersonaEntity> respuesta = new RespuestaCustomizada<>();
+			respuesta.setCodigoEstatus(HttpStatus.CREATED.value());
+			respuesta.setMensaje("Persona creada");
+			respuesta.setData(personaEntity);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.CREATED);
+		} catch (YaExisteExcepcion | DataIncorrectaExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
+		}
 	}
-	
-	@PutMapping
-	public PersonaEntity PUT(@RequestBody PersonaEntity entity) {
-		return service.save(entity);
+
+	@PutMapping("/{id}")
+	public ResponseEntity<RespuestaBase> actualizar(@PathVariable int id, @RequestBody PersonaEntity entity) {
+		try {
+			PersonaEntity personaEntity = service.actualizar(id, entity);
+			RespuestaCustomizada<PersonaEntity> respuesta = new RespuestaCustomizada<>();
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Persona actualizada");
+			respuesta.setData(personaEntity);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (DataIncorrectaExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
+		}
 	}
-	
-	@DeleteMapping
-	public ResponseEntity<String> DELETE(@RequestBody PersonaEntity entity) {
-		
-		if (!service.findById(entity.getId()).isPresent()) {
-            return ResponseEntity.badRequest().build();
-        }
-		
-		service.delete(entity);
-		return ResponseEntity.ok("Registro eliminado correctamente");
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<RespuestaBase> eliminar(@PathVariable int id) {
+
+		try {
+			boolean isTrue = service.eliminar(id);
+			RespuestaBase respuesta = new RespuestaBase();
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Se elimino registro");
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
+		}
+
 	}
-	
+
 }

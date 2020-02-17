@@ -35,10 +35,6 @@ public class ProyectotipoEntity implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to ProyectoEntity
-	@OneToMany(mappedBy="proyectotipo")
-	private List<ProyectoEntity> proyectos;
-
 	public ProyectotipoEntity() {
 	}
 
@@ -80,28 +76,6 @@ public class ProyectotipoEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<ProyectoEntity> getProyectos() {
-		return this.proyectos;
-	}
-
-	public void setProyectos(List<ProyectoEntity> proyectos) {
-		this.proyectos = proyectos;
-	}
-
-	public ProyectoEntity addProyecto(ProyectoEntity proyecto) {
-		getProyectos().add(proyecto);
-		proyecto.setProyectotipo(this);
-
-		return proyecto;
-	}
-
-	public ProyectoEntity removeProyecto(ProyectoEntity proyecto) {
-		getProyectos().remove(proyecto);
-		proyecto.setProyectotipo(null);
-
-		return proyecto;
 	}
 
 }

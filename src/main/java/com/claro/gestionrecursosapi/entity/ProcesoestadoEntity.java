@@ -40,8 +40,6 @@ public class ProcesoestadoEntity implements Serializable {
 	private int orden;
 
 	//bi-directional many-to-one association to PersonaprocesoEntity
-	@OneToMany(mappedBy="procesoestado")
-	private List<PersonaprocesoEntity> personaprocesos;
 
 	public ProcesoestadoEntity() {
 	}
@@ -100,28 +98,6 @@ public class ProcesoestadoEntity implements Serializable {
 
 	public void setOrden(int orden) {
 		this.orden = orden;
-	}
-
-	public List<PersonaprocesoEntity> getPersonaprocesos() {
-		return this.personaprocesos;
-	}
-
-	public void setPersonaprocesos(List<PersonaprocesoEntity> personaprocesos) {
-		this.personaprocesos = personaprocesos;
-	}
-
-	public PersonaprocesoEntity addPersonaproceso(PersonaprocesoEntity personaproceso) {
-		getPersonaprocesos().add(personaproceso);
-		personaproceso.setProcesoestado(this);
-
-		return personaproceso;
-	}
-
-	public PersonaprocesoEntity removePersonaproceso(PersonaprocesoEntity personaproceso) {
-		getPersonaprocesos().remove(personaproceso);
-		personaproceso.setProcesoestado(null);
-
-		return personaproceso;
 	}
 
 }

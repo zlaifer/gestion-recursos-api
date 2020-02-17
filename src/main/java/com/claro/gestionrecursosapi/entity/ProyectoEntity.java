@@ -50,14 +50,6 @@ public class ProyectoEntity implements Serializable {
 
 	private byte prioritario;
 
-	//bi-directional many-to-one association to EmpleadoasignacionEntity
-	@OneToMany(mappedBy="proyecto")
-	private List<EmpleadoasignacionEntity> empleadoasignacions;
-
-	//bi-directional many-to-one association to EmpleadocontrolEntity
-	@OneToMany(mappedBy="proyecto")
-	private List<EmpleadocontrolEntity> empleadocontrols;
-
 	//bi-directional many-to-one association to PresupuestoEntity
 	@ManyToOne
 	@JoinColumn(name="CODPRESUPUESTO")
@@ -67,14 +59,6 @@ public class ProyectoEntity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="CODPROYECTOTIPO")
 	private ProyectotipoEntity proyectotipo;
-
-	//bi-directional many-to-one association to ProyectoalcanceplaneacionEntity
-	@OneToMany(mappedBy="proyecto")
-	private List<ProyectoalcanceplaneacionEntity> proyectoalcanceplaneacions;
-
-	//bi-directional many-to-one association to ProyectosolicitudempleadoEntity
-	@OneToMany(mappedBy="proyecto")
-	private List<ProyectosolicitudempleadoEntity> proyectosolicitudempleados;
 
 	public ProyectoEntity() {
 	}
@@ -151,50 +135,6 @@ public class ProyectoEntity implements Serializable {
 		this.prioritario = prioritario;
 	}
 
-	public List<EmpleadoasignacionEntity> getEmpleadoasignacions() {
-		return this.empleadoasignacions;
-	}
-
-	public void setEmpleadoasignacions(List<EmpleadoasignacionEntity> empleadoasignacions) {
-		this.empleadoasignacions = empleadoasignacions;
-	}
-
-	public EmpleadoasignacionEntity addEmpleadoasignacion(EmpleadoasignacionEntity empleadoasignacion) {
-		getEmpleadoasignacions().add(empleadoasignacion);
-		empleadoasignacion.setProyecto(this);
-
-		return empleadoasignacion;
-	}
-
-	public EmpleadoasignacionEntity removeEmpleadoasignacion(EmpleadoasignacionEntity empleadoasignacion) {
-		getEmpleadoasignacions().remove(empleadoasignacion);
-		empleadoasignacion.setProyecto(null);
-
-		return empleadoasignacion;
-	}
-
-	public List<EmpleadocontrolEntity> getEmpleadocontrols() {
-		return this.empleadocontrols;
-	}
-
-	public void setEmpleadocontrols(List<EmpleadocontrolEntity> empleadocontrols) {
-		this.empleadocontrols = empleadocontrols;
-	}
-
-	public EmpleadocontrolEntity addEmpleadocontrol(EmpleadocontrolEntity empleadocontrol) {
-		getEmpleadocontrols().add(empleadocontrol);
-		empleadocontrol.setProyecto(this);
-
-		return empleadocontrol;
-	}
-
-	public EmpleadocontrolEntity removeEmpleadocontrol(EmpleadocontrolEntity empleadocontrol) {
-		getEmpleadocontrols().remove(empleadocontrol);
-		empleadocontrol.setProyecto(null);
-
-		return empleadocontrol;
-	}
-
 	public PresupuestoEntity getPresupuesto() {
 		return this.presupuesto;
 	}
@@ -209,50 +149,6 @@ public class ProyectoEntity implements Serializable {
 
 	public void setProyectotipo(ProyectotipoEntity proyectotipo) {
 		this.proyectotipo = proyectotipo;
-	}
-
-	public List<ProyectoalcanceplaneacionEntity> getProyectoalcanceplaneacions() {
-		return this.proyectoalcanceplaneacions;
-	}
-
-	public void setProyectoalcanceplaneacions(List<ProyectoalcanceplaneacionEntity> proyectoalcanceplaneacions) {
-		this.proyectoalcanceplaneacions = proyectoalcanceplaneacions;
-	}
-
-	public ProyectoalcanceplaneacionEntity addProyectoalcanceplaneacion(ProyectoalcanceplaneacionEntity proyectoalcanceplaneacion) {
-		getProyectoalcanceplaneacions().add(proyectoalcanceplaneacion);
-		proyectoalcanceplaneacion.setProyecto(this);
-
-		return proyectoalcanceplaneacion;
-	}
-
-	public ProyectoalcanceplaneacionEntity removeProyectoalcanceplaneacion(ProyectoalcanceplaneacionEntity proyectoalcanceplaneacion) {
-		getProyectoalcanceplaneacions().remove(proyectoalcanceplaneacion);
-		proyectoalcanceplaneacion.setProyecto(null);
-
-		return proyectoalcanceplaneacion;
-	}
-
-	public List<ProyectosolicitudempleadoEntity> getProyectosolicitudempleados() {
-		return this.proyectosolicitudempleados;
-	}
-
-	public void setProyectosolicitudempleados(List<ProyectosolicitudempleadoEntity> proyectosolicitudempleados) {
-		this.proyectosolicitudempleados = proyectosolicitudempleados;
-	}
-
-	public ProyectosolicitudempleadoEntity addProyectosolicitudempleado(ProyectosolicitudempleadoEntity proyectosolicitudempleado) {
-		getProyectosolicitudempleados().add(proyectosolicitudempleado);
-		proyectosolicitudempleado.setProyecto(this);
-
-		return proyectosolicitudempleado;
-	}
-
-	public ProyectosolicitudempleadoEntity removeProyectosolicitudempleado(ProyectosolicitudempleadoEntity proyectosolicitudempleado) {
-		getProyectosolicitudempleados().remove(proyectosolicitudempleado);
-		proyectosolicitudempleado.setProyecto(null);
-
-		return proyectosolicitudempleado;
 	}
 
 }
