@@ -1,0 +1,15 @@
+package com.claro.gestionrecursosapi.repository;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import com.claro.gestionrecursosapi.entity.UsuarioEntity;
+
+@Repository
+public interface IUsuarioRepository extends CrudRepository<UsuarioEntity, Integer> {
+
+	@Query("select * from usuario where usuario = (:usuario)")
+	public UsuarioEntity findByUsuario(@Param("usuario") String usuario);
+	
+}
