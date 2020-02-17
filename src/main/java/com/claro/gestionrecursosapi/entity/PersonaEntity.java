@@ -26,7 +26,7 @@ public class PersonaEntity {
 	private int codtipodocumento;
 	
 	@Min(value = 1, message = "Campo requerido")
-	private long numerodocumento;
+	private Long numerodocumento;
 	
 	@NotBlank(message = "Campo requerido")
 	private String nombre1;
@@ -68,11 +68,11 @@ public class PersonaEntity {
 		this.codtipodocumento = codtipodocumento;
 	}
 	
-	public long getNumerodocumento() {
+	public Long getNumerodocumento() {
 		return numerodocumento;
 	}
 	
-	public void setNumerodocumento(long numerodocumento) {
+	public void setNumerodocumento(Long numerodocumento) {
 		this.numerodocumento = numerodocumento;
 	}
 	
