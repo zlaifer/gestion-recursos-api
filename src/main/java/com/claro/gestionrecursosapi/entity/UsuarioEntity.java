@@ -19,11 +19,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class UsuarioEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Integer id;
 	@Min(value = 1, message = "Campo requerido")
 	private Integer codusuariorol;
 	@NotBlank(message = "Campo requerido")
+	@Column(name="usuario")
 	private String usuario;
 	@NotBlank(message = "Campo requerido")
 	private String nombre;
@@ -41,7 +42,7 @@ public class UsuarioEntity {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getCodusuariorol(Integer codusuariorol) {
+	public Integer getCodusuariorol() {
 		return this.codusuariorol;
 	}
 	public void setCodusuariorol(Integer codusuariorol) {

@@ -12,16 +12,16 @@ import com.claro.gestionrecursosapi.application.SeguridadApplication;
 import com.claro.gestionrecursosapi.entity.UsuarioEntity;
 
 @RestController
-@RequestMapping("/api/v1/seguridad")
+@RequestMapping("/api/v1/Seguridad")
 public class SeguridadController {
 
 	@Autowired
 	private SeguridadApplication service;
-	
+	 
 	@PostMapping
 	public Integer POST(@RequestBody UsuarioEntity entity) {
 		return service.iniciarSesion(entity);
-	}
+	}   
 	
 	@GetMapping
 	public UsuarioEntity GET(@RequestParam String usuario) {
