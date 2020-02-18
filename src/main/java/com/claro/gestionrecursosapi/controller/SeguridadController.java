@@ -12,7 +12,7 @@ import com.claro.gestionrecursosapi.application.SeguridadApplication;
 import com.claro.gestionrecursosapi.entity.UsuarioEntity;
 
 @RestController
-@RequestMapping("/api/v1/Seguridad")
+@RequestMapping("/api/v1/seguridad")
 public class SeguridadController {
 
 	@Autowired

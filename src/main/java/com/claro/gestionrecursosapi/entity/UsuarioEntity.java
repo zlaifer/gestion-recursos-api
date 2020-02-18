@@ -23,6 +23,9 @@ public class UsuarioEntity {
 	private Integer id;
 	@Min(value = 1, message = "Campo requerido")
 	private Integer codusuariorol;
+	@Min(value = 1, message = "Campo requerido")
+	@Column(updatable = false)
+	private Integer codpersona;
 	@NotBlank(message = "Campo requerido")
 	@Column(name="usuario")
 	private String usuario;
@@ -30,6 +33,8 @@ public class UsuarioEntity {
 	private String nombre;
 	@NotBlank(message = "Campo requerido")
 	private String clave;
+	@NotBlank(message = "Campo requerido")
+	private String estado;	
 	@CreationTimestamp
 	@Column(updatable = false)
 	private Date fechacreacion;
@@ -48,6 +53,12 @@ public class UsuarioEntity {
 	public void setCodusuariorol(Integer codusuariorol) {
 		this.codusuariorol = codusuariorol;
 	}
+	public Integer getCodpersona() {
+		return this.codpersona;
+	}
+	public void setCodpersona(Integer codpersona) {
+		this.codpersona = codpersona;
+	}
 	public String getUsuario() {
 		return usuario;
 	}
@@ -65,6 +76,12 @@ public class UsuarioEntity {
 	}
 	public void setClave(String clave) {
 		this.clave = clave;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	public Date getFechacreacion() {
 		return fechacreacion;
