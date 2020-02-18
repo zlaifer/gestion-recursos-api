@@ -15,66 +15,165 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.claro.gestionrecursosapi.domain.IProveedorService;
 import com.claro.gestionrecursosapi.domain.imp.ProveedorService;
+import com.claro.gestionrecursosapi.entity.PersonaEntity;
 import com.claro.gestionrecursosapi.entity.ProveedorEntity;
+import com.claro.gestionrecursosapi.excepcion.DataIncorrectaExcepcion;
+import com.claro.gestionrecursosapi.excepcion.NoExisteExcepcion;
+import com.claro.gestionrecursosapi.excepcion.YaExisteExcepcion;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
+import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
 import com.claro.gestionrecursosapi.model.RespuestaProveedor;
 
 @RestController
 @RequestMapping("/api/v1/proveedor")
 public class ProveedorController {
-	
 
 	@Autowired
-	private ProveedorService service;
-	
+	private IProveedorService service;
+
 	@GetMapping
-	public ResponseEntity<RespuestaBase> GET() {
-		
-		Iterable<ProveedorEntity> resultQuery = service.findAll();
-		if(((Collection<?>)resultQuery).size()>0) {
-			RespuestaProveedor respuestaProveedor = new RespuestaProveedor();
-			respuestaProveedor.setCodigoEstatus(100);
-			respuestaProveedor.setMensaje("Exitoso");
-			respuestaProveedor.setData(resultQuery);
-			return ResponseEntity.ok(respuestaProveedor);
-		}else {
-			RespuestaProveedor proveedoresResponse = new RespuestaProveedor();
-			proveedoresResponse.setCodigoEstatus(102);
-			proveedoresResponse.setMensaje("No existen datos");
-			return ResponseEntity.status(HttpStatus.CONFLICT).body(proveedoresResponse);
+	public ResponseEntity<RespuestaBase> buscarTodos() {
+		try {
+			Iterable<ProveedorEntity> resultadoConsulta = service.buscarTodos();
+			RespuestaCustomizada<Iterable<ProveedorEntity>> respuesta = new RespuestaCustomizada<>();
+
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(resultadoConsulta);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
 		}
-	}	
-		
-	
+	}
+
 	@GetMapping("/{id}")
-	public Optional<ProveedorEntity> GET(@PathVariable int id) {
-		return service.findById(id);
+	public ResponseEntity<RespuestaBase> buscarPorId(@PathVariable int id) throws NoExisteExcepcion {
+		try {
+			ProveedorEntity proveedorEntity = service.buscarPorId(id);
+			RespuestaCustomizada<ProveedorEntity> respuesta = new RespuestaCustomizada<>();
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(proveedorEntity);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping("/nit/{nit}")
+	public ResponseEntity<RespuestaBase> buscarPorNit(@PathVariable String nit) throws NoExisteExcepcion {
+		try {
+			ProveedorEntity proveedorEntity = service.buscarPorNit(nit);
+			RespuestaCustomizada<ProveedorEntity> respuesta = new RespuestaCustomizada<>();
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(proveedorEntity);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/linea/{linea}")
+	public ResponseEntity<RespuestaBase> buscarPorLinea(@PathVariable String linea) throws NoExisteExcepcion {
+		try {
+			Iterable<ProveedorEntity> resultadoConsulta = service.buscarPorLinea(linea);
+			RespuestaCustomizada<Iterable<ProveedorEntity>> respuesta = new RespuestaCustomizada<>();
+
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(resultadoConsulta);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
+		}
+	}
+	
+	@GetMapping("/especialidad/{especialidad}")
+	public ResponseEntity<RespuestaBase> buscarPorEspecialidad(@PathVariable String especialidad) throws NoExisteExcepcion {
+		try {
+			Iterable<ProveedorEntity> resultadoConsulta = service.buscarPorEspecialidad(especialidad);
+			RespuestaCustomizada<Iterable<ProveedorEntity>> respuesta = new RespuestaCustomizada<>();
+
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(resultadoConsulta);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
+		}
+	}
+	
+	@GetMapping("/estado/{estado}")
+	public ResponseEntity<RespuestaBase> buscarPorEstado(@PathVariable String estado) throws NoExisteExcepcion {
+		try {
+			Iterable<ProveedorEntity> resultadoConsulta = service.buscarPorEstado(estado);
+			RespuestaCustomizada<Iterable<ProveedorEntity>> respuesta = new RespuestaCustomizada<>();
+
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(resultadoConsulta);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
+		}
 	}
 	
 	@PostMapping
-	public ProveedorEntity POST(@RequestBody ProveedorEntity entity) {
-		return service.save(entity);
+	public ResponseEntity<RespuestaBase> crear(@RequestBody ProveedorEntity entity) {
+
+		try {
+			ProveedorEntity proveedorEntity = service.crear(entity);
+			RespuestaCustomizada<ProveedorEntity> respuesta = new RespuestaCustomizada<>();
+			respuesta.setCodigoEstatus(HttpStatus.CREATED.value());
+			respuesta.setMensaje("Proveedor creado");
+			respuesta.setData(proveedorEntity);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.CREATED);
+		} catch (YaExisteExcepcion | DataIncorrectaExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
+		}
 	}
-	
-	@PutMapping
-	public ProveedorEntity PUT(@RequestBody ProveedorEntity entity) {
-		return service.save(entity);
+
+	@PutMapping("/{id}")
+	public ResponseEntity<RespuestaBase> actualizar(@PathVariable int id, @RequestBody ProveedorEntity entity) {
+		try {
+			ProveedorEntity proveedorEntity = service.actualizar(id, entity);
+			RespuestaCustomizada<ProveedorEntity> respuesta = new RespuestaCustomizada<>();
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Se actualizo proveedor");
+			respuesta.setData(proveedorEntity);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
+
+		} catch (DataIncorrectaExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
+		}
 	}
-	
-	@DeleteMapping
-	public ResponseEntity<RespuestaBase> DELETE(@RequestBody ProveedorEntity entity) {
-		RespuestaProveedor respuestaProveedor = new RespuestaProveedor();
-		
-		service.delete(entity);
-		/*
-		if (!service.findById(entity.getId()).isPresent()) {
-            return ResponseEntity.badRequest().build();
-        }
-        */
-		
-		respuestaProveedor.setCodigoEstatus(200);
-		respuestaProveedor.setMensaje("Se elimino registro");		
-		return ResponseEntity.ok(respuestaProveedor);
+
+	@DeleteMapping("{id}")
+	public ResponseEntity<RespuestaBase> eliminar(@PathVariable int id) {
+		try {
+			service.eliminar(id);
+			RespuestaBase respuesta = new RespuestaBase();
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Se elimino registro ");
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (NoExisteExcepcion e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
+		}
+
 	}
 }

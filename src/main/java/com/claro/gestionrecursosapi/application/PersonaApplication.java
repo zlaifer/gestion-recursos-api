@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.claro.gestionrecursosapi.domain.IPersonaService;
+import com.claro.gestionrecursosapi.domain.imp.PersonaService;
 import com.claro.gestionrecursosapi.domain.UsuarioRolEnum;
 import com.claro.gestionrecursosapi.domain.UsuarioService;
 import com.claro.gestionrecursosapi.entity.PersonaEntity;

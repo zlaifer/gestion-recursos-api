@@ -39,9 +39,9 @@ public class ProveedorEntity {
 
 	@CreationTimestamp
 	@Column(updatable = false)
-	private Date fechacreacion;
+	private Date fechaCreacion;
 	@UpdateTimestamp
-	private Date fechamodificacion;
+	private Date fechaModificacion;
 
 	public int getId() {
 		return id;
@@ -131,20 +131,24 @@ public class ProveedorEntity {
 		this.estado = estado;
 	}
 
-	public Date getFechacreacion() {
-		return fechacreacion;
+	public Date getFechaCreacion() {
+		return fechaCreacion;
 	}
 
-	public void setFechacreacion(Date fechacreacion) {
-		this.fechacreacion = fechacreacion;
+	public void setFechaCreacion(Date fechacreacion) {
+		this.fechaCreacion = fechacreacion;
 	}
 
-	public Date getFechamodificacion() {
-		return fechamodificacion;
+	public Date getFechaModificacion() {
+		return fechaModificacion;
 	}
 
-	public void setFechamodificacion(Date fechamodificacion) {
-		this.fechamodificacion = fechamodificacion;
+	public void setFechaModificacion(Date fechamodificacion) {
+		this.fechaModificacion = fechamodificacion;
+	}
+
+	public boolean esDatosIncorrectos() {
+		return getId() <= 0 || getNombre() == null || getEstado() == null;
 	}
 
 }
