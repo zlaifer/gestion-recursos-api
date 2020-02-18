@@ -9,7 +9,7 @@ import com.claro.gestionrecursosapi.entity.UsuarioEntity;
 @Repository
 public interface IUsuarioRepository extends CrudRepository<UsuarioEntity, Integer> {
 
-	@Query("select * from usuario where usuario = (:usuario)")
+	@Query("select u from UsuarioEntity u where u.usuario = :usuario")
 	public UsuarioEntity findByUsuario(@Param("usuario") String usuario);
 	
 }
