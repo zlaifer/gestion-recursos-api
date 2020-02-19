@@ -28,9 +28,9 @@ public class EstructuraorganizacionalEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private Timestamp fechacreacion;
+	private Timestamp fechaCreacion;
 
-	private Timestamp fechamodificacion;
+	private Timestamp fechaModificacion;
 
 	private String nombre;
 
@@ -42,12 +42,12 @@ public class EstructuraorganizacionalEntity implements Serializable {
 	//bi-directional many-to-one association to EstructuraorganizacionalEntity
 	@ManyToOne
 	@JoinColumn(name="CODPADRE")
-	private EstructuraorganizacionalEntity estructuraorganizacional;
+	private EstructuraorganizacionalEntity estructuraOrganizacional;
 
 	//bi-directional many-to-one association to EstructuratipoEntity
 	@ManyToOne
 	@JoinColumn(name="CODESTRUCTURATIPO")
-	private EstructuratipoEntity estructuratipo;
+	private EstructuratipoEntity estructuraTipo;
 
 	public EstructuraorganizacionalEntity() {
 	}
@@ -60,20 +60,20 @@ public class EstructuraorganizacionalEntity implements Serializable {
 		this.id = id;
 	}
 
-	public Timestamp getFechacreacion() {
-		return this.fechacreacion;
+	public Timestamp getFechaCreacion() {
+		return this.fechaCreacion;
 	}
 
-	public void setFechacreacion(Timestamp fechacreacion) {
-		this.fechacreacion = fechacreacion;
+	public void setFechaCreacion(Timestamp fechacreacion) {
+		this.fechaCreacion = fechacreacion;
 	}
 
-	public Timestamp getFechamodificacion() {
-		return this.fechamodificacion;
+	public Timestamp getFechaModificacion() {
+		return this.fechaModificacion;
 	}
 
-	public void setFechamodificacion(Timestamp fechamodificacion) {
-		this.fechamodificacion = fechamodificacion;
+	public void setFechaModificacion(Timestamp fechamodificacion) {
+		this.fechaModificacion = fechamodificacion;
 	}
 
 	public String getNombre() {
@@ -92,20 +92,20 @@ public class EstructuraorganizacionalEntity implements Serializable {
 		this.empleado = empleado;
 	}
 
-	public EstructuraorganizacionalEntity getEstructuraorganizacional() {
-		return this.estructuraorganizacional;
+	public EstructuraorganizacionalEntity getEstructuraOrganizacional() {
+		return this.estructuraOrganizacional;
 	}
 
-	public void setEstructuraorganizacional(EstructuraorganizacionalEntity estructuraorganizacional) {
-		this.estructuraorganizacional = estructuraorganizacional;
+	public void setEstructuraOrganizacional(EstructuraorganizacionalEntity estructuraorganizacional) {
+		this.estructuraOrganizacional = estructuraorganizacional;
 	}
 
-	public EstructuratipoEntity getEstructuratipo() {
-		return this.estructuratipo;
+	public EstructuratipoEntity getEstructuraTipo() {
+		return this.estructuraTipo;
 	}
 
-	public void setEstructuratipo(EstructuratipoEntity estructuratipo) {
-		this.estructuratipo = estructuratipo;
+	public void setEstructuraTipo(EstructuratipoEntity estructuratipo) {
+		this.estructuraTipo = estructuratipo;
 	}
 
 }
