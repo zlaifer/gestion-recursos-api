@@ -4,64 +4,47 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import javax.persistence.EmbeddedId;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  * The persistent class for the perfilcosto database table.
  * 
  */
 @Entity
-@Table(name="perfilcosto")
-@NamedQuery(name="PerfilcostoEntity.findAll", query="SELECT p FROM PerfilcostoEntity p")
+@Table(name = "perfilcosto")
 public class PerfilcostoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private PerfilcostoEntityPK id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private String estado;
 
-	private Timestamp fechacreacion;
-
-	private Timestamp fechamodificacion;
+	@CreationTimestamp
+	@Column(updatable = false)
+	private Timestamp fechaCreacion;
+	@UpdateTimestamp
+	private Timestamp fechaModificacion;
 
 	private BigDecimal valor;
 
-	//bi-directional many-to-one association to LineasproductoEntity
-	@ManyToOne
-	@JoinColumn(name="CODLINEAPRODUCTO")
-	private LineasproductoEntity lineasproducto;
+	private Integer codlineaproducto;
 
-	//bi-directional many-to-one association to PerfilEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFIL", insertable=false, updatable=false)
-	private PerfilEntity perfil;
+	private Integer codperfil;
 
-	//bi-directional many-to-one association to PerfilnivelEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFIL")
-	private PerfilnivelEntity perfilnivel;
+	private Integer codperfilnivel;
 
-	//bi-directional many-to-one association to PerfiltipoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFILTIPO")
-	private PerfiltipoEntity perfiltipo;
+	private Integer codperfiltipo;
 
 	public PerfilcostoEntity() {
-	}
-
-	public PerfilcostoEntityPK getId() {
-		return this.id;
-	}
-
-	public void setId(PerfilcostoEntityPK id) {
-		this.id = id;
 	}
 
 	public String getEstado() {
@@ -72,20 +55,20 @@ public class PerfilcostoEntity implements Serializable {
 		this.estado = estado;
 	}
 
-	public Timestamp getFechacreacion() {
-		return this.fechacreacion;
+	public Timestamp getFechaCreacion() {
+		return this.fechaCreacion;
 	}
 
-	public void setFechacreacion(Timestamp fechacreacion) {
-		this.fechacreacion = fechacreacion;
+	public void setFechaCreacion(Timestamp fechacreacion) {
+		this.fechaCreacion = fechacreacion;
 	}
 
-	public Timestamp getFechamodificacion() {
-		return this.fechamodificacion;
+	public Timestamp getFechaModificacion() {
+		return this.fechaModificacion;
 	}
 
-	public void setFechamodificacion(Timestamp fechamodificacion) {
-		this.fechamodificacion = fechamodificacion;
+	public void setFechaModificacion(Timestamp fechamodificacion) {
+		this.fechaModificacion = fechamodificacion;
 	}
 
 	public BigDecimal getValor() {
@@ -96,36 +79,36 @@ public class PerfilcostoEntity implements Serializable {
 		this.valor = valor;
 	}
 
-	public LineasproductoEntity getLineasproducto() {
-		return this.lineasproducto;
+	public Integer getLineasproducto() {
+		return this.codlineaproducto;
 	}
 
-	public void setLineasproducto(LineasproductoEntity lineasproducto) {
-		this.lineasproducto = lineasproducto;
+	public void setLineasproducto(Integer lineasproducto) {
+		this.codlineaproducto = lineasproducto;
 	}
 
-	public PerfilEntity getPerfil() {
-		return this.perfil;
+	public Integer getPerfil() {
+		return this.codperfil;
 	}
 
-	public void setPerfil(PerfilEntity perfil) {
-		this.perfil = perfil;
+	public void setPerfil(Integer perfil) {
+		this.codperfil = perfil;
 	}
 
-	public PerfilnivelEntity getPerfilnivel() {
-		return this.perfilnivel;
+	public Integer getPerfilnivel() {
+		return this.codperfilnivel;
 	}
 
-	public void setPerfilnivel(PerfilnivelEntity perfilnivel) {
-		this.perfilnivel = perfilnivel;
+	public void setPerfilnivel(Integer perfilnivel) {
+		this.codperfilnivel = perfilnivel;
 	}
 
-	public PerfiltipoEntity getPerfiltipo() {
-		return this.perfiltipo;
+	public Integer getPerfiltipo() {
+		return this.codperfiltipo;
 	}
 
-	public void setPerfiltipo(PerfiltipoEntity perfiltipo) {
-		this.perfiltipo = perfiltipo;
+	public void setPerfiltipo(Integer perfiltipo) {
+		this.codperfiltipo = perfiltipo;
 	}
 
 }

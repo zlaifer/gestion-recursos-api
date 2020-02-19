@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.claro.gestionrecursosapi.entity.EstructuraorganizacionalEntity;
-import com.claro.gestionrecursosapi.repository.IEstructuraOrganizacional;
+import com.claro.gestionrecursosapi.repository.IEstructuraOrganizacionalRepository;
 
 @Service
 @Validated
 public class EstructuraOrganizacionService implements ICrudService<EstructuraorganizacionalEntity, Integer> {
 
 	@Autowired
-	private IEstructuraOrganizacional repository;
+	private IEstructuraOrganizacionalRepository repository;
 
 	@Override
 	public EstructuraorganizacionalEntity save(EstructuraorganizacionalEntity entity) {

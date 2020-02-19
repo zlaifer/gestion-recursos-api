@@ -2,15 +2,15 @@ package com.claro.gestionrecursosapi.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -29,9 +29,11 @@ public class PerfilEntity implements Serializable {
 
 	private String estado;
 
-	private Timestamp fechacreacion;
-
-	private Timestamp fechamodificacion;
+	@CreationTimestamp
+	@Column(updatable = false)
+	private Timestamp fechaCreacion;
+	@UpdateTimestamp
+	private Timestamp fechaModificacion;
 
 	private String nombre;
 
@@ -54,20 +56,20 @@ public class PerfilEntity implements Serializable {
 		this.estado = estado;
 	}
 
-	public Timestamp getFechacreacion() {
-		return this.fechacreacion;
+	public Timestamp getFechaCreacion() {
+		return this.fechaCreacion;
 	}
 
-	public void setFechacreacion(Timestamp fechacreacion) {
-		this.fechacreacion = fechacreacion;
+	public void setFechaCreacion(Timestamp fechacreacion) {
+		this.fechaCreacion = fechacreacion;
 	}
 
-	public Timestamp getFechamodificacion() {
-		return this.fechamodificacion;
+	public Timestamp getFechaModificacion() {
+		return this.fechaModificacion;
 	}
 
-	public void setFechamodificacion(Timestamp fechamodificacion) {
-		this.fechamodificacion = fechamodificacion;
+	public void setFechaModificacion(Timestamp fechamodificacion) {
+		this.fechaModificacion = fechamodificacion;
 	}
 
 	public String getNombre() {
