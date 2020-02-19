@@ -32,6 +32,7 @@ public class PresupuestoEntity {
 	private Date fechacreacion;
 	@UpdateTimestamp
 	private Date fechamodificacion;
+	
 	public Integer getId() {
 		return id;
 	}
