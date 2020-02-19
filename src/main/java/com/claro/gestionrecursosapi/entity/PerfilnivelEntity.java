@@ -28,6 +28,11 @@ public class PerfilnivelEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@CreationTimestamp
+	@Column(updatable = false)
+	private Timestamp fechaCreacion;
+	@UpdateTimestamp
+	private Timestamp fechaModificacion;
 
 	@CreationTimestamp
 	@Column(updatable = false)
@@ -53,20 +58,20 @@ public class PerfilnivelEntity implements Serializable {
 		this.id = id;
 	}
 
-	public Timestamp getFechacreacion() {
-		return this.fechacreacion;
+	public Timestamp getFechaCreacion() {
+		return this.fechaCreacion;
 	}
 
-	public void setFechacreacion(Timestamp fechacreacion) {
-		this.fechacreacion = fechacreacion;
+	public void setFechaCreacion(Timestamp fechacreacion) {
+		this.fechaCreacion = fechacreacion;
 	}
 
-	public Timestamp getFechamodificacion() {
-		return this.fechamodificacion;
+	public Timestamp getFechaModificacion() {
+		return this.fechaModificacion;
 	}
 
-	public void setFechamodificacion(Timestamp fechamodificacion) {
-		this.fechamodificacion = fechamodificacion;
+	public void setFechaModificacion(Timestamp fechamodificacion) {
+		this.fechaModificacion = fechamodificacion;
 	}
 
 	public int getJerarquia() {
