@@ -59,20 +59,20 @@ public class PerfilcostoEntity implements Serializable {
 		this.estado = estado;
 	}
 
-	public Timestamp getFechaCreacion() {
-		return this.fechaCreacion;
+	public Timestamp getFechacreacion() {
+		return this.fechacreacion;
 	}
 
-	public void setFechaCreacion(Timestamp fechacreacion) {
-		this.fechaCreacion = fechacreacion;
+	public void setFechacreacion(Timestamp fechacreacion) {
+		this.fechacreacion = fechacreacion;
 	}
 
-	public Timestamp getFechaModificacion() {
-		return this.fechaModificacion;
+	public Timestamp getFechamodificacion() {
+		return this.fechamodificacion;
 	}
 
-	public void setFechaModificacion(Timestamp fechamodificacion) {
-		this.fechaModificacion = fechamodificacion;
+	public void setFechamodificacion(Timestamp fechamodificacion) {
+		this.fechamodificacion = fechamodificacion;
 	}
 
 	public BigDecimal getValor() {
