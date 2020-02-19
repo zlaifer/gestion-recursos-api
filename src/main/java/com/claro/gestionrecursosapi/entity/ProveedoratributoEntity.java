@@ -2,17 +2,18 @@ package com.claro.gestionrecursosapi.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -21,7 +22,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="proveedoratributo")
-@NamedQuery(name="ProveedoratributoEntity.findAll", query="SELECT p FROM ProveedoratributoEntity p")
 public class ProveedoratributoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,18 +29,21 @@ public class ProveedoratributoEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@NotBlank(message = "Campo requerido")
 	private String estado;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@NotBlank(message = "Campo requerido")
 	private String nombre;
 
-	//bi-directional many-to-one association to ProveedoratributotipoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROVEEDORATRIBUTOTIPO")
-	private ProveedoratributotipoEntity proveedoratributotipo;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codproveedoratributotipo;
 
 	public ProveedoratributoEntity() {
 	}
@@ -85,12 +88,12 @@ public class ProveedoratributoEntity implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public ProveedoratributotipoEntity getProveedoratributotipo() {
-		return this.proveedoratributotipo;
+	public Integer getCodproveedoratributotipo() {
+		return codproveedoratributotipo;
 	}
 
-	public void setProveedoratributotipo(ProveedoratributotipoEntity proveedoratributotipo) {
-		this.proveedoratributotipo = proveedoratributotipo;
+	public void setCodproveedoratributotipo(Integer codproveedoratributotipo) {
+		this.codproveedoratributotipo = codproveedoratributotipo;
 	}
 
 }

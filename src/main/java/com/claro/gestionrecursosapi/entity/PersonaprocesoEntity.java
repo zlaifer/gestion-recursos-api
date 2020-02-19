@@ -3,14 +3,16 @@ package com.claro.gestionrecursosapi.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -19,7 +21,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="personaproceso")
-@NamedQuery(name="PersonaprocesoEntity.findAll", query="SELECT p FROM PersonaprocesoEntity p")
 public class PersonaprocesoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,21 +28,20 @@ public class PersonaprocesoEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
 	private String observacion;
 
-	//bi-directional many-to-one association to PersonaEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERSONA")
-	private PersonaEntity persona;
+	@Min(value = 1, message = "Campo requerido")
+	private PersonaEntity codpersona;
 
-	//bi-directional many-to-one association to ProcesoestadoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROCESOESTADO")
-	private ProcesoestadoEntity procesoestado;
+	@Min(value = 1, message = "Campo requerido")
+	private ProcesoestadoEntity codprocesoestado;
 
 	public PersonaprocesoEntity() {
 	}
@@ -78,20 +78,19 @@ public class PersonaprocesoEntity implements Serializable {
 		this.observacion = observacion;
 	}
 
-	public PersonaEntity getPersona() {
-		return this.persona;
+	public PersonaEntity getCodpersona() {
+		return codpersona;
 	}
 
-	public void setPersona(PersonaEntity persona) {
-		this.persona = persona;
+	public void setCodpersona(PersonaEntity codpersona) {
+		this.codpersona = codpersona;
 	}
 
-	public ProcesoestadoEntity getProcesoestado() {
-		return this.procesoestado;
+	public ProcesoestadoEntity getCodprocesoestado() {
+		return codprocesoestado;
 	}
 
-	public void setProcesoestado(ProcesoestadoEntity procesoestado) {
-		this.procesoestado = procesoestado;
+	public void setCodprocesoestado(ProcesoestadoEntity codprocesoestado) {
+		this.codprocesoestado = codprocesoestado;
 	}
-
 }

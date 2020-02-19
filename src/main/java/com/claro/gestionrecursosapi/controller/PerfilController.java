@@ -14,27 +14,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.claro.gestionrecursosapi.entity.EstructuraorganizacionalEntity;
+import com.claro.gestionrecursosapi.domain.PerfilService;
+import com.claro.gestionrecursosapi.entity.PerfilEntity;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
-import com.claro.gestionrecursosapi.repository.IEstructuraOrganizacionalRepository;
 
 @RestController
-@RequestMapping("/api/v1/estructuraorganizacional")
-public class EstructuraOrganizacionalController {
-
+@RequestMapping("/api/v1/perfil")
+public class PerfilController {
 	@Autowired
-	private IEstructuraOrganizacionalRepository service;
-	
+	private PerfilService service;
+
 	@GetMapping
 	public ResponseEntity<RespuestaBase> buscarTodo() {
 		try {
-			Iterable<EstructuraorganizacionalEntity> lista = service.findAll();
-			RespuestaCustomizada<Iterable<EstructuraorganizacionalEntity>> respuesta = new RespuestaCustomizada<>();
+			Iterable<PerfilEntity> listaPerfiles = service.findAll();
+			RespuestaCustomizada<Iterable<PerfilEntity>> respuesta = new RespuestaCustomizada<>();
 
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(lista);
+			respuesta.setData(listaPerfiles);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -42,15 +41,45 @@ public class EstructuraOrganizacionalController {
 		}
 
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<RespuestaBase> buscarPorId(@PathVariable Integer id) {
 		try {
-			Optional<EstructuraorganizacionalEntity> esctructuraEntity = service.findById(id);
-			RespuestaCustomizada<EstructuraorganizacionalEntity> respuesta = new RespuestaCustomizada<>();
+			Optional<PerfilEntity> perfilEntity = service.findById(id);
+			RespuestaCustomizada<PerfilEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(esctructuraEntity.get());
+			respuesta.setData(perfilEntity.get());
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (Exception e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping("/estado/{estado}")
+	public ResponseEntity<RespuestaBase> buscarContengaEstado(@PathVariable String estado) {
+		try {
+			Iterable<PerfilEntity> listadoPefil = service.findByEstadoContains(estado);
+			RespuestaCustomizada<Iterable<PerfilEntity>> respuesta = new RespuestaCustomizada<>();
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(listadoPefil);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (Exception e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping("/nombre/{nombre}")
+	public ResponseEntity<RespuestaBase> buscarContengaNombre(@PathVariable String nombre) {
+		try {
+			Iterable<PerfilEntity> listadoPefil = service.findByNombreContains(nombre);
+			RespuestaCustomizada<Iterable<PerfilEntity>> respuesta = new RespuestaCustomizada<>();
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(listadoPefil);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -59,39 +88,37 @@ public class EstructuraOrganizacionalController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<RespuestaBase> crear(@RequestBody EstructuraorganizacionalEntity entity) {
+	public ResponseEntity<RespuestaBase> crear(@RequestBody PerfilEntity entity) {
 		try {
-			EstructuraorganizacionalEntity esctructuraEntity = service.save(entity);
-			
-			RespuestaCustomizada<EstructuraorganizacionalEntity> respuesta = new RespuestaCustomizada<>();
+			PerfilEntity perfilEntity = service.save(entity);
+			RespuestaCustomizada<PerfilEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.CREATED.value());
-			respuesta.setMensaje("Se creo correctamente");
-			respuesta.setData(esctructuraEntity);
+			respuesta.setMensaje("Perfil creado");
+			respuesta.setData(perfilEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.CREATED);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
 			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
 		}
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<RespuestaBase> actualizar(@PathVariable Integer id, @RequestBody EstructuraorganizacionalEntity entity) {
+	public ResponseEntity<RespuestaBase> actualizar(@PathVariable Integer id, @RequestBody PerfilEntity entity) {
 		try {
-			EstructuraorganizacionalEntity estructuraEntity = service.save(entity);
-			RespuestaCustomizada<EstructuraorganizacionalEntity> respuesta = new RespuestaCustomizada<>();
+			PerfilEntity perfilEntity = service.save(entity);
+			RespuestaCustomizada<PerfilEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
-			respuesta.setMensaje("Se actualizo correctamente");
-			respuesta.setData(estructuraEntity);
+			respuesta.setMensaje("Perfil actualizado");
+			respuesta.setData(perfilEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
 			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
 		}
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<RespuestaBase> eliminar(@PathVariable Integer id) {
-
 		try {
 			service.delete(service.findById(id).get());
 			RespuestaBase respuesta = new RespuestaBase();
@@ -102,6 +129,5 @@ public class EstructuraOrganizacionalController {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
 			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
 		}
-
 	}
 }

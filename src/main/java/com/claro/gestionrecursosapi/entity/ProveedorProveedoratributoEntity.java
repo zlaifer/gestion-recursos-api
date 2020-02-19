@@ -3,14 +3,16 @@ package com.claro.gestionrecursosapi.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -19,7 +21,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="proveedor_proveedoratributo")
-@NamedQuery(name="ProveedorProveedoratributoEntity.findAll", query="SELECT p FROM ProveedorProveedoratributoEntity p")
 public class ProveedorProveedoratributoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,19 +28,18 @@ public class ProveedorProveedoratributoEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
-	//bi-directional many-to-one association to ProveedorEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROVEEDOR")
-	private ProveedorEntity proveedor;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codproveedor;
 
-	//bi-directional many-to-one association to ProveedoratributoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROVEEDORATRIBUTO")
-	private ProveedoratributoEntity proveedoratributo;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codproveedoratributo;
 
 	public ProveedorProveedoratributoEntity() {
 	}
@@ -68,20 +68,19 @@ public class ProveedorProveedoratributoEntity implements Serializable {
 		this.fechamodificacion = fechamodificacion;
 	}
 
-	public ProveedorEntity getProveedor() {
-		return this.proveedor;
+	public Integer getCodproveedor() {
+		return codproveedor;
 	}
 
-	public void setProveedor(ProveedorEntity proveedor) {
-		this.proveedor = proveedor;
+	public void setCodproveedor(Integer codproveedor) {
+		this.codproveedor = codproveedor;
 	}
 
-	public ProveedoratributoEntity getProveedoratributo() {
-		return this.proveedoratributo;
+	public Integer getCodproveedoratributo() {
+		return codproveedoratributo;
 	}
 
-	public void setProveedoratributo(ProveedoratributoEntity proveedoratributo) {
-		this.proveedoratributo = proveedoratributo;
+	public void setCodproveedoratributo(Integer codproveedoratributo) {
+		this.codproveedoratributo = codproveedoratributo;
 	}
-
 }

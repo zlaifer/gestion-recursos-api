@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -22,7 +24,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="personaausencia")
-@NamedQuery(name="PersonaausenciaEntity.findAll", query="SELECT p FROM PersonaausenciaEntity p")
 public class PersonaausenciaEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -32,6 +33,8 @@ public class PersonaausenciaEntity implements Serializable {
 
 	private String descripcion;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
 	@Temporal(TemporalType.DATE)
@@ -40,17 +43,14 @@ public class PersonaausenciaEntity implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechainicio;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
-	//bi-directional many-to-one association to PersonaEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERSONA")
-	private PersonaEntity persona;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codpersona;
 
-	//bi-directional many-to-one association to PersonaausenciatipoEntity
-	@ManyToOne
-	@JoinColumn(name="CODAUSENCIATIPO")
-	private PersonaausenciatipoEntity personaausenciatipo;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codausenciatipo;
 
 	public PersonaausenciaEntity() {
 	}
@@ -103,20 +103,21 @@ public class PersonaausenciaEntity implements Serializable {
 		this.fechamodificacion = fechamodificacion;
 	}
 
-	public PersonaEntity getPersona() {
-		return this.persona;
+	public Integer getCodpersona() {
+		return codpersona;
 	}
 
-	public void setPersona(PersonaEntity persona) {
-		this.persona = persona;
+	public void setCodpersona(Integer codpersona) {
+		this.codpersona = codpersona;
 	}
 
-	public PersonaausenciatipoEntity getPersonaausenciatipo() {
-		return this.personaausenciatipo;
+	public Integer getCodausenciatipo() {
+		return codausenciatipo;
 	}
 
-	public void setPersonaausenciatipo(PersonaausenciatipoEntity personaausenciatipo) {
-		this.personaausenciatipo = personaausenciatipo;
+	public void setCodausenciatipo(Integer codausenciatipo) {
+		this.codausenciatipo = codausenciatipo;
 	}
-
+	
+	
 }

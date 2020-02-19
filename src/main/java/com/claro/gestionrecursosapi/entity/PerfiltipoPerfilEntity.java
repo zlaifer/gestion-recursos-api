@@ -6,10 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 
 /**
@@ -18,7 +16,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="perfiltipo_perfil")
-@NamedQuery(name="PerfiltipoPerfilEntity.findAll", query="SELECT p FROM PerfiltipoPerfilEntity p")
 public class PerfiltipoPerfilEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,15 +23,11 @@ public class PerfiltipoPerfilEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	//bi-directional many-to-one association to PerfilEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFIL")
-	private PerfilEntity perfil;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfil;
 
-	//bi-directional many-to-one association to PerfiltipoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFILTIPO")
-	private PerfiltipoEntity perfiltipo;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfiltipo;
 
 	public PerfiltipoPerfilEntity() {
 	}
@@ -47,20 +40,19 @@ public class PerfiltipoPerfilEntity implements Serializable {
 		this.id = id;
 	}
 
-	public PerfilEntity getPerfil() {
-		return this.perfil;
+	public Integer getCodperfil() {
+		return codperfil;
 	}
 
-	public void setPerfil(PerfilEntity perfil) {
-		this.perfil = perfil;
+	public void setCodperfil(Integer codperfil) {
+		this.codperfil = codperfil;
 	}
 
-	public PerfiltipoEntity getPerfiltipo() {
-		return this.perfiltipo;
+	public Integer getCodperfiltipo() {
+		return codperfiltipo;
 	}
 
-	public void setPerfiltipo(PerfiltipoEntity perfiltipo) {
-		this.perfiltipo = perfiltipo;
+	public void setCodperfiltipo(Integer codperfiltipo) {
+		this.codperfiltipo = codperfiltipo;
 	}
-
 }

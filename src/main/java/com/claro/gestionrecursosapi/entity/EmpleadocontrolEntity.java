@@ -4,14 +4,16 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -20,7 +22,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="empleadocontrol")
-@NamedQuery(name="EmpleadocontrolEntity.findAll", query="SELECT e FROM EmpleadocontrolEntity e")
 public class EmpleadocontrolEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -30,25 +31,25 @@ public class EmpleadocontrolEntity implements Serializable {
 
 	private String descripcion;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
 	private Timestamp fechahorafin;
 
 	private Timestamp fechahorainicio;
-
+	
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@Min(value = 1, message = "Campo requerido")
 	private BigDecimal horas;
 
-	//bi-directional many-to-one association to EmpleadoEntity
-	@ManyToOne
-	@JoinColumn(name="CODEMPLEADO")
-	private EmpleadoEntity empleado;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codempleado;
 
-	//bi-directional many-to-one association to ProyectoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROYECTO")
-	private ProyectoEntity proyecto;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codproyecto;
 
 	public EmpleadocontrolEntity() {
 	}
@@ -109,20 +110,20 @@ public class EmpleadocontrolEntity implements Serializable {
 		this.horas = horas;
 	}
 
-	public EmpleadoEntity getEmpleado() {
-		return this.empleado;
+	public Integer getCodEmpleado() {
+		return this.codempleado;
 	}
 
-	public void setEmpleado(EmpleadoEntity empleado) {
-		this.empleado = empleado;
+	public void setEmpleado(Integer codempleado) {
+		this.codempleado = codempleado;
 	}
 
-	public ProyectoEntity getProyecto() {
-		return this.proyecto;
+	public Integer getProyecto() {
+		return this.codproyecto;
 	}
 
-	public void setProyecto(ProyectoEntity proyecto) {
-		this.proyecto = proyecto;
+	public void setCodProyecto(Integer codproyecto) {
+		this.codproyecto = codproyecto;
 	}
 
 }

@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import com.claro.gestionrecursosapi.entity.EstructuratipoEntity;
-import com.claro.gestionrecursosapi.repository.IEstructuraTipo;
+import com.claro.gestionrecursosapi.repository.IEstructuraTipoRepository;
 
 @Service
 @Validated
 public class EstructuraTipoService implements ICrudService<EstructuratipoEntity, Integer> {
 	@Autowired
-	private IEstructuraTipo repository;
+	private IEstructuraTipoRepository repository;
 
 	@Override
 	public EstructuratipoEntity save(EstructuratipoEntity entity) {

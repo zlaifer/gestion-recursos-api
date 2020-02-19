@@ -2,17 +2,17 @@ package com.claro.gestionrecursosapi.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -21,7 +21,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="habilidad")
-@NamedQuery(name="HabilidadEntity.findAll", query="SELECT h FROM HabilidadEntity h")
 public class HabilidadEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,16 +28,17 @@ public class HabilidadEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@NotBlank(message = "Campo requerido")
 	private String nombre;
-
-	//bi-directional many-to-one association to HabilidadtipoEntity
-	@ManyToOne
-	@JoinColumn(name="CODHABILIDADTIPO")
-	private HabilidadtipoEntity habilidadtipo;
+	
+	private Integer codhabilidadtipo;
 
 	public HabilidadEntity() {
 	}
@@ -75,12 +75,12 @@ public class HabilidadEntity implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public HabilidadtipoEntity getHabilidadtipo() {
-		return this.habilidadtipo;
+	public Integer getCodhabilidadtipo() {
+		return codhabilidadtipo;
 	}
 
-	public void setHabilidadtipo(HabilidadtipoEntity habilidadtipo) {
-		this.habilidadtipo = habilidadtipo;
+	public void setCodhabilidadtipo(Integer codhabilidadtipo) {
+		this.codhabilidadtipo = codhabilidadtipo;
 	}
 
 }

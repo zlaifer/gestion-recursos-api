@@ -5,16 +5,20 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -23,7 +27,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="rolcosto")
-@NamedQuery(name="RolcostoEntity.findAll", query="SELECT r FROM RolcostoEntity r")
 public class RolcostoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -33,6 +36,8 @@ public class RolcostoEntity implements Serializable {
 
 	private String estado;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
 	@Temporal(TemporalType.DATE)
@@ -41,19 +46,17 @@ public class RolcostoEntity implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechainicio;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@Min(value = 1, message = "Campo requerido")
 	private BigDecimal valor;
 
-	//bi-directional many-to-one association to ProveedorEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROVEEDOR")
-	private ProveedorEntity proveedor;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codproveedor;
 
-	//bi-directional many-to-one association to RolEntity
-	@ManyToOne
-	@JoinColumn(name="CODROL")
-	private RolEntity rol;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codrol;
 
 	public RolcostoEntity() {
 	}
@@ -114,20 +117,19 @@ public class RolcostoEntity implements Serializable {
 		this.valor = valor;
 	}
 
-	public ProveedorEntity getProveedor() {
-		return this.proveedor;
+	public Integer getCodproveedor() {
+		return codproveedor;
 	}
 
-	public void setProveedor(ProveedorEntity proveedor) {
-		this.proveedor = proveedor;
+	public void setCodproveedor(Integer codproveedor) {
+		this.codproveedor = codproveedor;
 	}
 
-	public RolEntity getRol() {
-		return this.rol;
+	public Integer getCodrol() {
+		return codrol;
 	}
 
-	public void setRol(RolEntity rol) {
-		this.rol = rol;
+	public void setCodrol(Integer codrol) {
+		this.codrol = codrol;
 	}
-
 }

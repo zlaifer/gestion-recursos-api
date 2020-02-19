@@ -2,15 +2,17 @@ package com.claro.gestionrecursosapi.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -19,7 +21,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="perfil")
-@NamedQuery(name="PerfilEntity.findAll", query="SELECT p FROM PerfilEntity p")
 public class PerfilEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,12 +28,17 @@ public class PerfilEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@NotBlank(message = "Campo requerido")
 	private String estado;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@NotBlank(message = "Campo requerido")
 	private String nombre;
 
 	public PerfilEntity() {
