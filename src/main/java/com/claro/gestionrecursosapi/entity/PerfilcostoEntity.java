@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import javax.persistence.EmbeddedId;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -18,50 +20,35 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="perfilcosto")
-@NamedQuery(name="PerfilcostoEntity.findAll", query="SELECT p FROM PerfilcostoEntity p")
 public class PerfilcostoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private PerfilcostoEntityPK id;
-
+	@NotBlank(message = "Campo requerido")
 	private String estado;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@Min(value = 1, message = "Campo requerido")
 	private BigDecimal valor;
 
-	//bi-directional many-to-one association to LineasproductoEntity
-	@ManyToOne
-	@JoinColumn(name="CODLINEAPRODUCTO")
-	private LineasproductoEntity lineasproducto;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codlineaproducto;
 
-	//bi-directional many-to-one association to PerfilEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFIL", insertable=false, updatable=false)
-	private PerfilEntity perfil;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfil;
 
-	//bi-directional many-to-one association to PerfilnivelEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFIL")
-	private PerfilnivelEntity perfilnivel;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfilnivel;
 
-	//bi-directional many-to-one association to PerfiltipoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFILTIPO")
-	private PerfiltipoEntity perfiltipo;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfiltipo;
 
 	public PerfilcostoEntity() {
-	}
-
-	public PerfilcostoEntityPK getId() {
-		return this.id;
-	}
-
-	public void setId(PerfilcostoEntityPK id) {
-		this.id = id;
 	}
 
 	public String getEstado() {
@@ -96,36 +83,35 @@ public class PerfilcostoEntity implements Serializable {
 		this.valor = valor;
 	}
 
-	public LineasproductoEntity getLineasproducto() {
-		return this.lineasproducto;
+	public Integer getCodlineaproducto() {
+		return codlineaproducto;
 	}
 
-	public void setLineasproducto(LineasproductoEntity lineasproducto) {
-		this.lineasproducto = lineasproducto;
+	public void setCodlineaproducto(Integer codlineaproducto) {
+		this.codlineaproducto = codlineaproducto;
 	}
 
-	public PerfilEntity getPerfil() {
-		return this.perfil;
+	public Integer getCodperfil() {
+		return codperfil;
 	}
 
-	public void setPerfil(PerfilEntity perfil) {
-		this.perfil = perfil;
+	public void setCodperfil(Integer codperfil) {
+		this.codperfil = codperfil;
 	}
 
-	public PerfilnivelEntity getPerfilnivel() {
-		return this.perfilnivel;
+	public Integer getCodperfilnivel() {
+		return codperfilnivel;
 	}
 
-	public void setPerfilnivel(PerfilnivelEntity perfilnivel) {
-		this.perfilnivel = perfilnivel;
+	public void setCodperfilnivel(Integer codperfilnivel) {
+		this.codperfilnivel = codperfilnivel;
 	}
 
-	public PerfiltipoEntity getPerfiltipo() {
-		return this.perfiltipo;
+	public Integer getCodperfiltipo() {
+		return codperfiltipo;
 	}
 
-	public void setPerfiltipo(PerfiltipoEntity perfiltipo) {
-		this.perfiltipo = perfiltipo;
+	public void setCodperfiltipo(Integer codperfiltipo) {
+		this.codperfiltipo = codperfiltipo;
 	}
-
 }

@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -22,7 +24,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="empleadoasignacion")
-@NamedQuery(name="EmpleadoasignacionEntity.findAll", query="SELECT e FROM EmpleadoasignacionEntity e")
 public class EmpleadoasignacionEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -30,6 +31,8 @@ public class EmpleadoasignacionEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
 	@Temporal(TemporalType.DATE)
@@ -38,24 +41,20 @@ public class EmpleadoasignacionEntity implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechainicio;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@Min(value = 1, message = "Campo requerido")
 	private int porcentaje;
 
-	//bi-directional many-to-one association to EmpleadoEntity
-	@ManyToOne
-	@JoinColumn(name="CODEMPLEADO")
-	private EmpleadoEntity empleado;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codempleado;
 
-	//bi-directional many-to-one association to PerfilEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFIL")
-	private PerfilEntity perfil;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfil;
 
-	//bi-directional many-to-one association to ProyectoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROYECTO")
-	private ProyectoEntity proyecto;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codproyecto;
 
 	public EmpleadoasignacionEntity() {
 	}
@@ -108,28 +107,28 @@ public class EmpleadoasignacionEntity implements Serializable {
 		this.porcentaje = porcentaje;
 	}
 
-	public EmpleadoEntity getEmpleado() {
-		return this.empleado;
+	public Integer getCodEmpleado() {
+		return this.codempleado;
 	}
 
-	public void setEmpleado(EmpleadoEntity empleado) {
-		this.empleado = empleado;
+	public void setCodEmpleado(Integer codempleado) {
+		this.codempleado = codempleado;
 	}
 
-	public PerfilEntity getPerfil() {
-		return this.perfil;
+	public Integer getCodPerfil() {
+		return this.codperfil;
 	}
 
-	public void setPerfil(PerfilEntity perfil) {
-		this.perfil = perfil;
+	public void setCodPerfil(Integer codperfil) {
+		this.codperfil = codperfil;
 	}
 
-	public ProyectoEntity getProyecto() {
-		return this.proyecto;
+	public Integer getCodProyecto() {
+		return this.codproyecto;
 	}
 
-	public void setProyecto(ProyectoEntity proyecto) {
-		this.proyecto = proyecto;
+	public void setProyecto(Integer codproyecto) {
+		this.codproyecto = codproyecto;
 	}
 
 }

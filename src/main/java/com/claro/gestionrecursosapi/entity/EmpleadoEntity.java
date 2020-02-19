@@ -3,19 +3,20 @@ package com.claro.gestionrecursosapi.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -24,7 +25,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="empleado")
-@NamedQuery(name="EmpleadoEntity.findAll", query="SELECT e FROM EmpleadoEntity e")
 public class EmpleadoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -32,66 +32,51 @@ public class EmpleadoEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@NotBlank(message = "Campo requerido")
 	private String codcentrocosto;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
 	@Temporal(TemporalType.DATE)
 	private Date fechaingreso;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@NotBlank(message = "Campo requerido")
 	private String usuarioclaro;
 
-	//bi-directional many-to-one association to EmpleadoEntity
-	@ManyToOne
-	@JoinColumn(name="CODEMPLEADOJEFE")
-	private EmpleadoEntity empleado;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codempleadojefe;
 
-	//bi-directional many-to-one association to EmpleadopresupuestoEntity
-	@ManyToOne
-	@JoinColumn(name="CODEMPLEADOPRESUPUESTO")
-	private EmpleadopresupuestoEntity empleadopresupuesto;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codempleadopresupuesto;
 
-	//bi-directional many-to-one association to EstructuraorganizacionalEntity
-	@ManyToOne
-	@JoinColumn(name="CODGERENCIA")
-	private EstructuraorganizacionalEntity estructuraorganizacional1;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codgerencia;
 
-	//bi-directional many-to-one association to EstructuraorganizacionalEntity
-	@ManyToOne
-	@JoinColumn(name="CODDIRECCION")
-	private EstructuraorganizacionalEntity estructuraorganizacional2;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer coddireccion;
 
-	//bi-directional many-to-one association to LineasproductoEntity
-	@ManyToOne
-	@JoinColumn(name="CODLINEAPRODUCTO")
-	private LineasproductoEntity lineasproducto;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codlineaproducto;
 
-	//bi-directional many-to-one association to PerfilEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFIL")
-	private PerfilEntity perfil;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfil;
 
-	//bi-directional many-to-one association to PerfilnivelEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFILNIVEL")
-	private PerfilnivelEntity perfilnivel;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfilnivel;
 
-	//bi-directional many-to-one association to PerfiltipoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFILTIPO")
-	private PerfiltipoEntity perfiltipo;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfiltipo;
 
-	//bi-directional many-to-one association to PersonaEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERSONA")
-	private PersonaEntity persona;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codpersona;
 
-	//bi-directional many-to-one association to ProveedorEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROVEEDOR")
-	private ProveedorEntity proveedor;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codproveedor;
 
 	public EmpleadoEntity() {
 	}
@@ -144,85 +129,83 @@ public class EmpleadoEntity implements Serializable {
 		this.usuarioclaro = usuarioclaro;
 	}
 
-	public EmpleadoEntity getEmpleado() {
-		return this.empleado;
+	public Integer getCodempleadojefe() {
+		return codempleadojefe;
 	}
 
-	public void setEmpleado(EmpleadoEntity empleado) {
-		this.empleado = empleado;
+	public void setCodempleadojefe(Integer codempleadojefe) {
+		this.codempleadojefe = codempleadojefe;
 	}
 
-	public EmpleadopresupuestoEntity getEmpleadopresupuesto() {
-		return this.empleadopresupuesto;
+	public Integer getCodempleadopresupuesto() {
+		return codempleadopresupuesto;
 	}
 
-	public void setEmpleadopresupuesto(EmpleadopresupuestoEntity empleadopresupuesto) {
-		this.empleadopresupuesto = empleadopresupuesto;
+	public void setCodempleadopresupuesto(Integer codempleadopresupuesto) {
+		this.codempleadopresupuesto = codempleadopresupuesto;
 	}
 
-	public EstructuraorganizacionalEntity getEstructuraorganizacional1() {
-		return this.estructuraorganizacional1;
+	public Integer getCodgerencia() {
+		return codgerencia;
 	}
 
-	public void setEstructuraorganizacional1(EstructuraorganizacionalEntity estructuraorganizacional1) {
-		this.estructuraorganizacional1 = estructuraorganizacional1;
+	public void setCodgerencia(Integer codgerencia) {
+		this.codgerencia = codgerencia;
 	}
 
-	public EstructuraorganizacionalEntity getEstructuraorganizacional2() {
-		return this.estructuraorganizacional2;
+	public Integer getCoddireccion() {
+		return coddireccion;
 	}
 
-	public void setEstructuraorganizacional2(EstructuraorganizacionalEntity estructuraorganizacional2) {
-		this.estructuraorganizacional2 = estructuraorganizacional2;
+	public void setCoddireccion(Integer coddireccion) {
+		this.coddireccion = coddireccion;
 	}
 
-	public LineasproductoEntity getLineasproducto() {
-		return this.lineasproducto;
+	public Integer getCodlineaproducto() {
+		return codlineaproducto;
 	}
 
-	public void setLineasproducto(LineasproductoEntity lineasproducto) {
-		this.lineasproducto = lineasproducto;
+	public void setCodlineaproducto(Integer codlineaproducto) {
+		this.codlineaproducto = codlineaproducto;
 	}
 
-	public PerfilEntity getPerfil() {
-		return this.perfil;
+	public Integer getCodperfil() {
+		return codperfil;
 	}
 
-	public void setPerfil(PerfilEntity perfil) {
-		this.perfil = perfil;
+	public void setCodperfil(Integer codperfil) {
+		this.codperfil = codperfil;
 	}
 
-	public PerfilnivelEntity getPerfilnivel() {
-		return this.perfilnivel;
+	public Integer getCodperfilnivel() {
+		return codperfilnivel;
 	}
 
-	public void setPerfilnivel(PerfilnivelEntity perfilnivel) {
-		this.perfilnivel = perfilnivel;
+	public void setCodperfilnivel(Integer codperfilnivel) {
+		this.codperfilnivel = codperfilnivel;
 	}
 
-	public PerfiltipoEntity getPerfiltipo() {
-		return this.perfiltipo;
+	public Integer getCodperfiltipo() {
+		return codperfiltipo;
 	}
 
-	public void setPerfiltipo(PerfiltipoEntity perfiltipo) {
-		this.perfiltipo = perfiltipo;
+	public void setCodperfiltipo(Integer codperfiltipo) {
+		this.codperfiltipo = codperfiltipo;
 	}
 
-	public PersonaEntity getPersona() {
-		return this.persona;
+	public Integer getCodpersona() {
+		return codpersona;
 	}
 
-	public void setPersona(PersonaEntity persona) {
-		this.persona = persona;
+	public void setCodpersona(Integer codpersona) {
+		this.codpersona = codpersona;
 	}
 
-	public ProveedorEntity getProveedor() {
-		return this.proveedor;
+	public Integer getCodproveedor() {
+		return codproveedor;
 	}
 
-	public void setProveedor(ProveedorEntity proveedor) {
-		this.proveedor = proveedor;
+	public void setCodproveedor(Integer codproveedor) {
+		this.codproveedor = codproveedor;
 	}
-
-
 }

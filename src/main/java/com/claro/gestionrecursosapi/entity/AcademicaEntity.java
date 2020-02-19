@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -22,7 +24,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="academica")
-@NamedQuery(name="AcademicaEntity.findAll", query="SELECT a FROM AcademicaEntity a")
 public class AcademicaEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -30,6 +31,8 @@ public class AcademicaEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
 	@Temporal(TemporalType.DATE)
@@ -38,21 +41,18 @@ public class AcademicaEntity implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechainicio;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@NotBlank(message = "Campo requerido")
 	private String institucion;
 
+	@NotBlank(message = "Campo requerido")
 	private String titulo;
 
-	//bi-directional many-to-one association to AcademicanivelEntity
-	@ManyToOne
-	@JoinColumn(name="CODACADEMICANIVEL")
-	private AcademicanivelEntity academicanivel;
+	private Integer codacademicanivel;
 
-	//bi-directional many-to-one association to PersonaEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERSONA")
-	private PersonaEntity persona;
+	private Integer codpersona;
 
 	public AcademicaEntity() {
 	}
@@ -113,20 +113,20 @@ public class AcademicaEntity implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public AcademicanivelEntity getAcademicanivel() {
-		return this.academicanivel;
+	public Integer getCodAcademicanivel() {
+		return this.codacademicanivel;
 	}
 
-	public void setAcademicanivel(AcademicanivelEntity academicanivel) {
-		this.academicanivel = academicanivel;
+	public void setCodAcademicanivel(Integer codacademicanivel) {
+		this.codacademicanivel = codacademicanivel;
 	}
 
-	public PersonaEntity getPersona() {
-		return this.persona;
+	public Integer getCodPersona() {
+		return this.codpersona;
 	}
 
-	public void setPersona(PersonaEntity persona) {
-		this.persona = persona;
+	public void setCodPersona(Integer codpersona) {
+		this.codpersona = codpersona;
 	}
 
 }

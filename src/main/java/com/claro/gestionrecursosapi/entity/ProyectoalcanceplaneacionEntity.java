@@ -3,14 +3,17 @@ package com.claro.gestionrecursosapi.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -19,7 +22,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="proyectoalcanceplaneacion")
-@NamedQuery(name="ProyectoalcanceplaneacionEntity.findAll", query="SELECT p FROM ProyectoalcanceplaneacionEntity p")
 public class ProyectoalcanceplaneacionEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,18 +31,21 @@ public class ProyectoalcanceplaneacionEntity implements Serializable {
 
 	private String descripcion;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@Min(value = 1, message = "Campo requerido")
 	private int orden;
 
+	@NotBlank(message = "Campo requerido")
 	private String tipo;
 
-	//bi-directional many-to-one association to ProyectoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROYECTO")
-	private ProyectoEntity proyecto;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codproyecto;
 
 	public ProyectoalcanceplaneacionEntity() {
 	}
@@ -93,12 +98,12 @@ public class ProyectoalcanceplaneacionEntity implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public ProyectoEntity getProyecto() {
-		return this.proyecto;
+	public Integer getCodproyecto() {
+		return codproyecto;
 	}
 
-	public void setProyecto(ProyectoEntity proyecto) {
-		this.proyecto = proyecto;
+	public void setCodproyecto(Integer codproyecto) {
+		this.codproyecto = codproyecto;
 	}
 
 }

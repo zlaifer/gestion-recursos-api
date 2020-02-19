@@ -2,15 +2,17 @@ package com.claro.gestionrecursosapi.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -19,7 +21,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="rol")
-@NamedQuery(name="RolEntity.findAll", query="SELECT r FROM RolEntity r")
 public class RolEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,19 +30,15 @@ public class RolEntity implements Serializable {
 
 	private String estado;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
+	@NotBlank(message = "Campo requerido")
 	private String nombre;
-
-	//bi-directional many-to-one association to PerfilRolHomologacionEntity
-	@OneToMany(mappedBy="rol")
-	private List<PerfilRolHomologacionEntity> perfilRolHomologacions;
-
-	//bi-directional many-to-one association to RolcostoEntity
-	@OneToMany(mappedBy="rol")
-	private List<RolcostoEntity> rolcostos;
 
 	public RolEntity() {
 	}
@@ -84,50 +81,6 @@ public class RolEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<PerfilRolHomologacionEntity> getPerfilRolHomologacions() {
-		return this.perfilRolHomologacions;
-	}
-
-	public void setPerfilRolHomologacions(List<PerfilRolHomologacionEntity> perfilRolHomologacions) {
-		this.perfilRolHomologacions = perfilRolHomologacions;
-	}
-
-	public PerfilRolHomologacionEntity addPerfilRolHomologacion(PerfilRolHomologacionEntity perfilRolHomologacion) {
-		getPerfilRolHomologacions().add(perfilRolHomologacion);
-		perfilRolHomologacion.setRol(this);
-
-		return perfilRolHomologacion;
-	}
-
-	public PerfilRolHomologacionEntity removePerfilRolHomologacion(PerfilRolHomologacionEntity perfilRolHomologacion) {
-		getPerfilRolHomologacions().remove(perfilRolHomologacion);
-		perfilRolHomologacion.setRol(null);
-
-		return perfilRolHomologacion;
-	}
-
-	public List<RolcostoEntity> getRolcostos() {
-		return this.rolcostos;
-	}
-
-	public void setRolcostos(List<RolcostoEntity> rolcostos) {
-		this.rolcostos = rolcostos;
-	}
-
-	public RolcostoEntity addRolcosto(RolcostoEntity rolcosto) {
-		getRolcostos().add(rolcosto);
-		rolcosto.setRol(this);
-
-		return rolcosto;
-	}
-
-	public RolcostoEntity removeRolcosto(RolcostoEntity rolcosto) {
-		getRolcostos().remove(rolcosto);
-		rolcosto.setRol(null);
-
-		return rolcosto;
 	}
 
 }

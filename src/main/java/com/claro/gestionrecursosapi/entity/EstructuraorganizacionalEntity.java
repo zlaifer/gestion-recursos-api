@@ -2,16 +2,18 @@ package com.claro.gestionrecursosapi.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -20,7 +22,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="estructuraorganizacional")
-@NamedQuery(name="EstructuraorganizacionalEntity.findAll", query="SELECT e FROM EstructuraorganizacionalEntity e")
 public class EstructuraorganizacionalEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,26 +29,24 @@ public class EstructuraorganizacionalEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechaCreacion;
 
+	@UpdateTimestamp
 	private Timestamp fechaModificacion;
 
+	@NotBlank(message = "Campo requerido")
 	private String nombre;
 
-	//bi-directional many-to-one association to EmpleadoEntity
-	@ManyToOne
-	@JoinColumn(name="CODEMPLEADO_RESPONSABLE")
-	private EmpleadoEntity empleado;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codempleadoResponsable;
 
-	//bi-directional many-to-one association to EstructuraorganizacionalEntity
-	@ManyToOne
-	@JoinColumn(name="CODPADRE")
-	private EstructuraorganizacionalEntity estructuraOrganizacional;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codpadre;
 
-	//bi-directional many-to-one association to EstructuratipoEntity
-	@ManyToOne
-	@JoinColumn(name="CODESTRUCTURATIPO")
-	private EstructuratipoEntity estructuraTipo;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codestructuratipo;
 
 	public EstructuraorganizacionalEntity() {
 	}
@@ -84,28 +83,27 @@ public class EstructuraorganizacionalEntity implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public EmpleadoEntity getEmpleado() {
-		return this.empleado;
+	public Integer getCodempleadoResponsable() {
+		return codempleadoResponsable;
 	}
 
-	public void setEmpleado(EmpleadoEntity empleado) {
-		this.empleado = empleado;
+	public void setCodempleadoResponsable(Integer codempleadoResponsable) {
+		this.codempleadoResponsable = codempleadoResponsable;
 	}
 
-	public EstructuraorganizacionalEntity getEstructuraOrganizacional() {
-		return this.estructuraOrganizacional;
+	public Integer getCodpadre() {
+		return codpadre;
 	}
 
-	public void setEstructuraOrganizacional(EstructuraorganizacionalEntity estructuraorganizacional) {
-		this.estructuraOrganizacional = estructuraorganizacional;
+	public void setCodpadre(Integer codpadre) {
+		this.codpadre = codpadre;
 	}
 
-	public EstructuratipoEntity getEstructuraTipo() {
-		return this.estructuraTipo;
+	public Integer getCodestructuratipo() {
+		return codestructuratipo;
 	}
 
-	public void setEstructuraTipo(EstructuratipoEntity estructuratipo) {
-		this.estructuraTipo = estructuratipo;
+	public void setCodestructuratipo(Integer codestructuratipo) {
+		this.codestructuratipo = codestructuratipo;
 	}
-
 }
