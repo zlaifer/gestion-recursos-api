@@ -1,6 +1,5 @@
 package com.claro.gestionrecursosapi.repository;
 
-import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,7 @@ public interface IProveedorRepository extends CrudRepository<ProveedorEntity, In
 
 	ProveedorEntity findByNit(String Nit);
 
-	ProveedorEntity findByContratoMarco(String contratoMarco);
+	ProveedorEntity findByContratomarco(String contratomarco);
 
 	Iterable<ProveedorEntity> findByLinea(String linea);
 

@@ -15,18 +15,17 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "Proveedor")
-
 public class ProveedorEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	private String nit;
 
 	@NotBlank(message = "Campo requerido")
 	private String nombre;
 
-	private String contratoMarco;
+	private String contratomarco;
 	private String especialidad;
 	private String linea;
 	private byte[] logo;
@@ -43,11 +42,11 @@ public class ProveedorEntity {
 	@UpdateTimestamp
 	private Date fechaModificacion;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -67,12 +66,12 @@ public class ProveedorEntity {
 		this.nombre = nombre;
 	}
 
-	public String getContratoMarco() {
-		return contratoMarco;
+	public String getContratomarco() {
+		return contratomarco;
 	}
 
-	public void setContratoMarco(String contratoMarco) {
-		this.contratoMarco = contratoMarco;
+	public void setContratomarco(String contratomarco) {
+		this.contratomarco = contratomarco;
 	}
 
 	public String getEspecialidad() {
@@ -145,10 +144,6 @@ public class ProveedorEntity {
 
 	public void setFechaModificacion(Date fechamodificacion) {
 		this.fechaModificacion = fechamodificacion;
-	}
-
-	public boolean esDatosIncorrectos() {
-		return getId() <= 0 || getNombre() == null || getEstado() == null;
 	}
 
 }

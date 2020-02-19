@@ -31,7 +31,7 @@ public class ProyectoEntity implements Serializable {
 	private String codigoproyecto;
 	private String nombre;
 	private String descripcion;
-	private byte prioritario;
+	private Boolean prioritario;
 	private Date fechainicio;
 	private Date fechafin;
 	@CreationTimestamp
@@ -76,10 +76,10 @@ public class ProyectoEntity implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public byte getPrioritario() {
+	public Boolean getPrioritario() {
 		return prioritario;
 	}
-	public void setPrioritario(byte prioritario) {
+	public void setPrioritario(Boolean prioritario) {
 		this.prioritario = prioritario;
 	}
 	public Date getFechafin() {
