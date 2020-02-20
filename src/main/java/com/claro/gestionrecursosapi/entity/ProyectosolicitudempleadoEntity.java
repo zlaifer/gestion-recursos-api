@@ -4,34 +4,37 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  * The persistent class for the proyectosolicitudempleado database table.
  * 
  */
 @Entity
-@Table(name="proyectosolicitudempleado")
-@NamedQuery(name="ProyectosolicitudempleadoEntity.findAll", query="SELECT p FROM ProyectosolicitudempleadoEntity p")
+@Table(name = "proyectosolicitudempleado")
+@NamedQuery(name = "ProyectosolicitudempleadoEntity.findAll", query = "SELECT p FROM ProyectosolicitudempleadoEntity p")
 public class ProyectosolicitudempleadoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private int cantidad;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
 	@Temporal(TemporalType.DATE)
@@ -40,34 +43,20 @@ public class ProyectosolicitudempleadoEntity implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechainicio;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
 	private int porcentajeasignacion;
 
-	//bi-directional many-to-one association to LineasproductoEntity
-	@ManyToOne
-	@JoinColumn(name="CODLINEAPRODUCTO")
-	private LineasproductoEntity lineasproducto;
+	private Integer codlineaproducto;
 
-	//bi-directional many-to-one association to PerfilEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFIL")
-	private PerfilEntity perfil;
+	private Integer codperfil;
 
-	//bi-directional many-to-one association to PerfilnivelEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFILNIVEL")
-	private PerfilnivelEntity perfilnivel;
+	private Integer codperfilnivel;
 
-	//bi-directional many-to-one association to PerfiltipoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFILTIPO")
-	private PerfiltipoEntity perfiltipo;
+	private Integer codperfiltipo;
 
-	//bi-directional many-to-one association to ProyectoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROYECTO")
-	private ProyectoEntity proyecto;
+	private Integer codproyecto;
 
 	public ProyectosolicitudempleadoEntity() {
 	}
@@ -128,44 +117,44 @@ public class ProyectosolicitudempleadoEntity implements Serializable {
 		this.porcentajeasignacion = porcentajeasignacion;
 	}
 
-	public LineasproductoEntity getLineasproducto() {
-		return this.lineasproducto;
+	public Integer getLineasproducto() {
+		return this.codlineaproducto;
 	}
 
-	public void setLineasproducto(LineasproductoEntity lineasproducto) {
-		this.lineasproducto = lineasproducto;
+	public void setLineasproducto(Integer lineasproducto) {
+		this.codlineaproducto = lineasproducto;
 	}
 
-	public PerfilEntity getPerfil() {
-		return this.perfil;
+	public Integer getPerfil() {
+		return this.codperfil;
 	}
 
-	public void setPerfil(PerfilEntity perfil) {
-		this.perfil = perfil;
+	public void setPerfil(Integer perfil) {
+		this.codperfil = perfil;
 	}
 
-	public PerfilnivelEntity getPerfilnivel() {
-		return this.perfilnivel;
+	public Integer getPerfilnivel() {
+		return this.codperfilnivel;
 	}
 
-	public void setPerfilnivel(PerfilnivelEntity perfilnivel) {
-		this.perfilnivel = perfilnivel;
+	public void setPerfilnivel(Integer perfilnivel) {
+		this.codperfilnivel = perfilnivel;
 	}
 
-	public PerfiltipoEntity getPerfiltipo() {
-		return this.perfiltipo;
+	public Integer getPerfiltipo() {
+		return this.codperfiltipo;
 	}
 
-	public void setPerfiltipo(PerfiltipoEntity perfiltipo) {
-		this.perfiltipo = perfiltipo;
+	public void setPerfiltipo(Integer perfiltipo) {
+		this.codperfiltipo = perfiltipo;
 	}
 
-	public ProyectoEntity getProyecto() {
-		return this.proyecto;
+	public Integer getProyecto() {
+		return this.codproyecto;
 	}
 
-	public void setProyecto(ProyectoEntity proyecto) {
-		this.proyecto = proyecto;
+	public void setProyecto(Integer proyecto) {
+		this.codproyecto = proyecto;
 	}
 
 }

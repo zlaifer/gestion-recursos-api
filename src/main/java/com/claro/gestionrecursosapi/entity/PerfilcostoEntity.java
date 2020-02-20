@@ -52,7 +52,7 @@ public class PerfilcostoEntity implements Serializable {
 	}
 
 	public void setEstado(String estado) {
-		this.estado = estado;
+		this.estado = estado;	
 	}
 
 	public Timestamp getFechaCreacion() {
