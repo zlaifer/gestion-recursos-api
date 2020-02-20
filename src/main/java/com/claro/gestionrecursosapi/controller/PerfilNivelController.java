@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.claro.gestionrecursosapi.domain.PerfilNivelService;
-import com.claro.gestionrecursosapi.entity.PerfilEntity;
-import com.claro.gestionrecursosapi.entity.PerfilnivelEntity;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
+import com.claro.gestionrecursosapi.perfil.domain.PerfilNivelService;
+import com.claro.gestionrecursosapi.perfil.entity.PerfilEntity;
+import com.claro.gestionrecursosapi.perfil.entity.PerfilnivelEntity;
 
 @RestController
 @RequestMapping("/api/v1/perfilnivel")

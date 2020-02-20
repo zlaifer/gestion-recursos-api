@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.claro.gestionrecursosapi.application.PersonaApplication;
-import com.claro.gestionrecursosapi.domain.IPersonaService;
-import com.claro.gestionrecursosapi.entity.PersonaEntity;
 import com.claro.gestionrecursosapi.excepcion.DataIncorrectaExcepcion;
 import com.claro.gestionrecursosapi.excepcion.NoExisteExcepcion;
 import com.claro.gestionrecursosapi.excepcion.YaExisteExcepcion;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
+import com.claro.gestionrecursosapi.persona.domain.IPersonaService;
+import com.claro.gestionrecursosapi.persona.entity.PersonaEntity;
 
 @RestController
 @RequestMapping("/api/v1/persona")

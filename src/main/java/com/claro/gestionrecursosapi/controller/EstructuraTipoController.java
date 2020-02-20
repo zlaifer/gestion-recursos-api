@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.claro.gestionrecursosapi.domain.EstructuraTipoService;
-import com.claro.gestionrecursosapi.entity.EstructuratipoEntity;
+
+import com.claro.gestionrecursosapi.estructura.domain.EstructuraTipoService;
+import com.claro.gestionrecursosapi.estructura.entity.EstructuratipoEntity;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
 

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.claro.gestionrecursosapi.domain.EmpleadoControlService;
-import com.claro.gestionrecursosapi.entity.EmpleadocontrolEntity;
+import com.claro.gestionrecursosapi.empleado.domain.EmpleadoControlService;
+import com.claro.gestionrecursosapi.empleado.entity.EmpleadocontrolEntity;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
 

@@ -5,13 +5,13 @@ import java.nio.charset.StandardCharsets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.claro.gestionrecursosapi.domain.IPersonaService;
-import com.claro.gestionrecursosapi.domain.UsuarioRolEnum;
-import com.claro.gestionrecursosapi.domain.UsuarioService;
-import com.claro.gestionrecursosapi.entity.PersonaEntity;
-import com.claro.gestionrecursosapi.entity.UsuarioEntity;
 import com.claro.gestionrecursosapi.excepcion.DataIncorrectaExcepcion;
 import com.claro.gestionrecursosapi.excepcion.YaExisteExcepcion;
+import com.claro.gestionrecursosapi.persona.domain.IPersonaService;
+import com.claro.gestionrecursosapi.persona.entity.PersonaEntity;
+import com.claro.gestionrecursosapi.usuario.domain.UsuarioRolEnum;
+import com.claro.gestionrecursosapi.usuario.domain.UsuarioService;
+import com.claro.gestionrecursosapi.usuario.entity.UsuarioEntity;
 import com.google.common.hash.Hashing;
 
 @Service

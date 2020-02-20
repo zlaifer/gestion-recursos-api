@@ -3,8 +3,8 @@ package com.claro.gestionrecursosapi.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.claro.gestionrecursosapi.domain.UsuarioService;
-import com.claro.gestionrecursosapi.entity.UsuarioEntity;
+import com.claro.gestionrecursosapi.usuario.domain.UsuarioService;
+import com.claro.gestionrecursosapi.usuario.entity.UsuarioEntity;
 
 @Service
 public class SeguridadApplication {

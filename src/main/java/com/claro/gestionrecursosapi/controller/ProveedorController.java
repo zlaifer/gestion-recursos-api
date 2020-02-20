@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.claro.gestionrecursosapi.domain.IProveedorService;
-import com.claro.gestionrecursosapi.entity.ProveedorEntity;
 import com.claro.gestionrecursosapi.excepcion.DataIncorrectaExcepcion;
 import com.claro.gestionrecursosapi.excepcion.NoExisteExcepcion;
 import com.claro.gestionrecursosapi.excepcion.YaExisteExcepcion;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
+import com.claro.gestionrecursosapi.proveedor.domain.IProveedorService;
+import com.claro.gestionrecursosapi.proveedor.entity.ProveedorEntity;
 
 @RestController
 @RequestMapping("/api/v1/proveedor")

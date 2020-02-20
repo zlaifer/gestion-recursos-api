@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.claro.gestionrecursosapi.domain.PresupuestoService;
-import com.claro.gestionrecursosapi.entity.PresupuestoEntity;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
+import com.claro.gestionrecursosapi.presupuesto.domain.PresupuestoService;
+import com.claro.gestionrecursosapi.presupuesto.entity.PresupuestoEntity;
 
 @RestController
 @RequestMapping("/api/v1/presupuesto")

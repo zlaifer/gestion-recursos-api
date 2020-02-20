@@ -1,6 +1,6 @@
 package com.claro.gestionrecursosapi.model;
 
-import com.claro.gestionrecursosapi.entity.ProveedorEntity;
+import com.claro.gestionrecursosapi.proveedor.entity.ProveedorEntity;
 
 public class RespuestaProveedor extends RespuestaBase {
 

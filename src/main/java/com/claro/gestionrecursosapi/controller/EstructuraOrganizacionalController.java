@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.claro.gestionrecursosapi.entity.EstructuraorganizacionalEntity;
+import com.claro.gestionrecursosapi.estructura.entity.EstructuraorganizacionalEntity;
+import com.claro.gestionrecursosapi.estructura.repository.IEstructuraOrganizacionalRepository;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
-import com.claro.gestionrecursosapi.repository.IEstructuraOrganizacionalRepository;
 
 @RestController
 @RequestMapping("/api/v1/estructuraorganizacional")

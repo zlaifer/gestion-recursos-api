@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.claro.gestionrecursosapi.application.SeguridadApplication;
-import com.claro.gestionrecursosapi.entity.UsuarioEntity;
+import com.claro.gestionrecursosapi.usuario.entity.UsuarioEntity;
 
 @RestController
 @RequestMapping("/api/v1/seguridad")

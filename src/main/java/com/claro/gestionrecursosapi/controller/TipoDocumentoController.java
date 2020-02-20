@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.claro.gestionrecursosapi.domain.TipoDocumentoService;
-import com.claro.gestionrecursosapi.entity.TipoDocumentoEntity;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
+import com.claro.gestionrecursosapi.persona.domain.TipoDocumentoService;
+import com.claro.gestionrecursosapi.persona.entity.TipoDocumentoEntity;
 
 @RestController
 @RequestMapping("/api/v1/tipodocumento")
