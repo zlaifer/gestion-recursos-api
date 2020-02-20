@@ -134,22 +134,6 @@ public class ProyectoSolicitudEmpleadoController {
 		}
 	}
 
-	@GetMapping("/fechas")
-	public ResponseEntity<RespuestaBase> buscarPorProyecto(@RequestBody ProyectosolicitudempleadoEntity entity) {
-		try {
-			Iterable<ProyectosolicitudempleadoEntity> listaProyectoSolicitud = service
-					.findByDates(entity.getFechainicio().toString(), entity.getFechafin().toString());
-			RespuestaCustomizada<Iterable<ProyectosolicitudempleadoEntity>> respuesta = new RespuestaCustomizada<>();
-			respuesta.setCodigoEstatus(HttpStatus.OK.value());
-			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(listaProyectoSolicitud);
-			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
-		} catch (Exception e) {
-			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
-			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
-		}
-	}
-
 	@PostMapping
 	public ResponseEntity<RespuestaBase> crear(@RequestBody ProyectosolicitudempleadoEntity entity) {
 		try {

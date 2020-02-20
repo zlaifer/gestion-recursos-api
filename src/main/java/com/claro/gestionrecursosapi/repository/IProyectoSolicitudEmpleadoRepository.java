@@ -18,6 +18,4 @@ public interface IProyectoSolicitudEmpleadoRepository extends CrudRepository<Pro
 	
 	Iterable<ProyectosolicitudempleadoEntity> findByCodproyecto(Integer codProyecto);
 	
-	Iterable<ProyectosolicitudempleadoEntity> findAllByFechainicioLessThanEqualAndFechafinGreaterThanEqual(String fechaFin, String fechaInicio);
-	
 }

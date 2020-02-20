@@ -40,7 +40,7 @@ public class ProyectoSolicitudEmpleadoService implements ICrudService<Proyectoso
 	}
 	
 	public Iterable<ProyectosolicitudempleadoEntity> findByPerfilTipo(Integer codPerfilTipo){
-		return repository.findByCodlineaproducto(codPerfilTipo);		
+		return repository.findByCodperfiltipo(codPerfilTipo);		
 	}
 	
 	public Iterable<ProyectosolicitudempleadoEntity> findByPerfilNivel(Integer codPerfilNivel){
@@ -51,11 +51,6 @@ public class ProyectoSolicitudEmpleadoService implements ICrudService<Proyectoso
 		return repository.findByCodproyecto(codProyecto);		
 	}
 	
-	public Iterable<ProyectosolicitudempleadoEntity> findByDates(String fechaInicio, String fechaFin){
-		
-		return repository.findAllByFechainicioLessThanEqualAndFechafinGreaterThanEqual(fechaFin, fechaInicio);		
-	}
-
 	@Override
 	public boolean existsById(Integer id) {
 		return repository.existsById(id);
