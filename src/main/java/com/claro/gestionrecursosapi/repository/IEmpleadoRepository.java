@@ -3,7 +3,7 @@ package com.claro.gestionrecursosapi.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.claro.gestionrecursosapi.entity.EmpleadoEntity;
+import com.claro.gestionrecursosapi.empleado.entity.EmpleadoEntity;
 
 @Repository
 public interface IEmpleadoRepository extends CrudRepository<EmpleadoEntity, Integer>{

@@ -1,4 +1,4 @@
-package com.claro.gestionrecursosapi.domain;
+package com.claro.gestionrecursosapi.proyecto.domain;
 
 import java.util.Optional;
 
@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.claro.gestionrecursosapi.entity.ProyectosolicitudempleadoEntity;
+import com.claro.gestionrecursosapi.domain.ICrudService;
+import com.claro.gestionrecursosapi.proyecto.entity.ProyectosolicitudempleadoEntity;
 import com.claro.gestionrecursosapi.repository.IProyectoSolicitudEmpleadoRepository;
 
 @Service

@@ -1,10 +1,9 @@
 package com.claro.gestionrecursosapi.repository;
 
-import java.time.OffsetDateTime;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.claro.gestionrecursosapi.entity.ProyectosolicitudempleadoEntity;
+import com.claro.gestionrecursosapi.proyecto.entity.ProyectosolicitudempleadoEntity;
 
 public interface IProyectoSolicitudEmpleadoRepository extends CrudRepository<ProyectosolicitudempleadoEntity, Integer> {
 	

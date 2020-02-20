@@ -1,4 +1,4 @@
-package com.claro.gestionrecursosapi.domain.imp;
+package com.claro.gestionrecursosapi.empleado.domain;
 
 import java.util.Optional;
 
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.claro.gestionrecursosapi.domain.ICrudService;
-import com.claro.gestionrecursosapi.entity.EmpleadoEntity;
+import com.claro.gestionrecursosapi.empleado.entity.EmpleadoEntity;
 import com.claro.gestionrecursosapi.repository.IEmpleadoRepository;
 
 @Service
