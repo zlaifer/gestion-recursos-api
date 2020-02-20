@@ -3,14 +3,16 @@ package com.claro.gestionrecursosapi.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -19,7 +21,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="perfil_rol_homologacion")
-@NamedQuery(name="PerfilRolHomologacionEntity.findAll", query="SELECT p FROM PerfilRolHomologacionEntity p")
 public class PerfilRolHomologacionEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,19 +28,18 @@ public class PerfilRolHomologacionEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@CreationTimestamp
+	@Column(updatable = false)
 	private Timestamp fechacreacion;
 
+	@UpdateTimestamp
 	private Timestamp fechamodificacion;
 
-	//bi-directional many-to-one association to PerfilEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFIL")
-	private PerfilEntity perfil;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfil;
 
-	//bi-directional many-to-one association to RolEntity
-	@ManyToOne
-	@JoinColumn(name="CODROL")
-	private RolEntity rol;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codrol;
 
 	public PerfilRolHomologacionEntity() {
 	}
@@ -68,20 +68,19 @@ public class PerfilRolHomologacionEntity implements Serializable {
 		this.fechamodificacion = fechamodificacion;
 	}
 
-	public PerfilEntity getPerfil() {
-		return this.perfil;
+	public Integer getCodperfil() {
+		return codperfil;
 	}
 
-	public void setPerfil(PerfilEntity perfil) {
-		this.perfil = perfil;
+	public void setCodperfil(Integer codperfil) {
+		this.codperfil = codperfil;
 	}
 
-	public RolEntity getRol() {
-		return this.rol;
+	public Integer getCodrol() {
+		return codrol;
 	}
 
-	public void setRol(RolEntity rol) {
-		this.rol = rol;
+	public void setCodrol(Integer codrol) {
+		this.codrol = codrol;
 	}
-
 }

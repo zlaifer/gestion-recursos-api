@@ -2,13 +2,15 @@ package com.claro.gestionrecursosapi.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -19,7 +21,6 @@ import org.hibernate.annotations.UpdateTimestamp;
  */
 @Entity
 @Table(name="perfil")
-@NamedQuery(name="PerfilEntity.findAll", query="SELECT p FROM PerfilEntity p")
 public class PerfilEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,14 +28,17 @@ public class PerfilEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@NotBlank(message = "Campo requerido")
 	private String estado;
 
 	@CreationTimestamp
 	@Column(updatable = false)
-	private Timestamp fechaCreacion;
-	@UpdateTimestamp
-	private Timestamp fechaModificacion;
+	private Timestamp fechacreacion;
 
+	@UpdateTimestamp
+	private Timestamp fechamodificacion;
+
+	@NotBlank(message = "Campo requerido")
 	private String nombre;
 
 	public PerfilEntity() {
@@ -56,20 +60,20 @@ public class PerfilEntity implements Serializable {
 		this.estado = estado;
 	}
 
-	public Timestamp getFechaCreacion() {
-		return this.fechaCreacion;
+	public Timestamp getFechacreacion() {
+		return this.fechacreacion;
 	}
 
-	public void setFechaCreacion(Timestamp fechacreacion) {
-		this.fechaCreacion = fechacreacion;
+	public void setFechacreacion(Timestamp fechacreacion) {
+		this.fechacreacion = fechacreacion;
 	}
 
-	public Timestamp getFechaModificacion() {
-		return this.fechaModificacion;
+	public Timestamp getFechamodificacion() {
+		return this.fechamodificacion;
 	}
 
-	public void setFechaModificacion(Timestamp fechamodificacion) {
-		this.fechaModificacion = fechamodificacion;
+	public void setFechamodificacion(Timestamp fechamodificacion) {
+		this.fechamodificacion = fechamodificacion;
 	}
 
 	public String getNombre() {

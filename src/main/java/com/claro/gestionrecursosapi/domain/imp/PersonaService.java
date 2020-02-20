@@ -24,10 +24,7 @@ public class PersonaService implements IPersonaService {
 
 	@Override
 	public PersonaEntity crear(PersonaEntity entity) throws YaExisteExcepcion, DataIncorrectaExcepcion {
-		if (entity.isIncorrectData()) {
-			throw new DataIncorrectaExcepcion("Todos los campos son obligatorios");
-		//} else if (repository.findById(entity.getId()).isPresent()) {
-		} else if (repository.findByIdAndCodtipodocumento(entity.getId(), entity.getCodtipodocumento()).isPresent()) {
+		if (repository.findByIdAndCodtipodocumento(entity.getId(), entity.getCodtipodocumento()).isPresent()) {
 		//} else if (repository.findFirstByCodtipodocumentoAndNumerodocumento(entity.getCodtipodocumento(), entity.getNumerodocumento()) != null) {
 			throw new YaExisteExcepcion("Ya existe una persona con ese numero de documento");
 		} else {
@@ -38,21 +35,18 @@ public class PersonaService implements IPersonaService {
 	@Override
 	public PersonaEntity actualizar(int id, PersonaEntity personaEntity)
 			throws DataIncorrectaExcepcion, NoExisteExcepcion {
-		if (personaEntity.isIncorrectData()) {
-			throw new DataIncorrectaExcepcion("Todos los campos son obligatorios");
-		} else {
-			PersonaEntity personaEntityBuscada = buscarPorId(id);
-			personaEntityBuscada.setNombre1(personaEntity.getNombre1());
-			personaEntityBuscada.setApellido1(personaEntity.getApellido1());
-			personaEntityBuscada.setNombre2(personaEntity.getNombre2());
-			personaEntityBuscada.setApellido2(personaEntity.getApellido2());
-			personaEntityBuscada.setTelefono(personaEntity.getTelefono());
-			personaEntityBuscada.setCorreo(personaEntity.getCorreo());
-			personaEntityBuscada.setDireccionresidencia(personaEntity.getDireccionresidencia());
-			personaEntityBuscada.setGenero(personaEntity.getGenero());
-			personaEntityBuscada.setFechanacimiento(personaEntity.getFechanacimiento());
-			return repository.save(personaEntityBuscada);
-		}
+	
+		PersonaEntity personaEntityBuscada = buscarPorId(id);
+		personaEntityBuscada.setNombre1(personaEntity.getNombre1());
+		personaEntityBuscada.setApellido1(personaEntity.getApellido1());
+		personaEntityBuscada.setNombre2(personaEntity.getNombre2());
+		personaEntityBuscada.setApellido2(personaEntity.getApellido2());
+		personaEntityBuscada.setTelefono(personaEntity.getTelefono());
+		personaEntityBuscada.setCorreo(personaEntity.getCorreo());
+		personaEntityBuscada.setDireccionresidencia(personaEntity.getDireccionresidencia());
+		personaEntityBuscada.setGenero(personaEntity.getGenero());
+		personaEntityBuscada.setFechanacimiento(personaEntity.getFechanacimiento());
+		return repository.save(personaEntityBuscada);
 
 	}
 

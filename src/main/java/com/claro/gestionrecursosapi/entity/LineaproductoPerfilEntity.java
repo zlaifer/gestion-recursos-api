@@ -6,10 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 
 /**
@@ -18,7 +16,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="lineaproducto_perfil")
-@NamedQuery(name="LineaproductoPerfilEntity.findAll", query="SELECT l FROM LineaproductoPerfilEntity l")
 public class LineaproductoPerfilEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,15 +23,11 @@ public class LineaproductoPerfilEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	//bi-directional many-to-one association to LineasproductoEntity
-	@ManyToOne
-	@JoinColumn(name="CODLINEAPRODUCTO")
-	private LineasproductoEntity lineasproducto;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codlineaproducto;
 
-	//bi-directional many-to-one association to PerfilEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERFIL")
-	private PerfilEntity perfil;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfil;
 
 	public LineaproductoPerfilEntity() {
 	}
@@ -47,20 +40,22 @@ public class LineaproductoPerfilEntity implements Serializable {
 		this.id = id;
 	}
 
-	public LineasproductoEntity getLineasproducto() {
-		return this.lineasproducto;
+	public Integer getCodlineaproducto() {
+		return codlineaproducto;
 	}
 
-	public void setLineasproducto(LineasproductoEntity lineasproducto) {
-		this.lineasproducto = lineasproducto;
+	public void setCodlineaproducto(Integer codlineaproducto) {
+		this.codlineaproducto = codlineaproducto;
 	}
 
-	public PerfilEntity getPerfil() {
-		return this.perfil;
+	public Integer getCodperfil() {
+		return codperfil;
 	}
 
-	public void setPerfil(PerfilEntity perfil) {
-		this.perfil = perfil;
+	public void setCodperfil(Integer codperfil) {
+		this.codperfil = codperfil;
 	}
+	
+	
 
 }

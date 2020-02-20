@@ -1,17 +1,19 @@
 package com.claro.gestionrecursosapi.entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -20,9 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="empleadocontrol")
-@NamedQuery(name="EmpleadocontrolEntity.findAll", query="SELECT e FROM EmpleadocontrolEntity e")
-public class EmpleadocontrolEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class EmpleadocontrolEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,25 +30,25 @@ public class EmpleadocontrolEntity implements Serializable {
 
 	private String descripcion;
 
-	private Timestamp fechacreacion;
+	@CreationTimestamp
+	@Column(updatable = false)
+	private Date fechacreacion;
 
-	private Timestamp fechahorafin;
+	private Date fechahorafin;
 
-	private Timestamp fechahorainicio;
+	private Date fechahorainicio;
+	
+	@UpdateTimestamp
+	private Date fechamodificacion;
 
-	private Timestamp fechamodificacion;
-
+	@Min(value = 1, message = "Campo requerido")
 	private BigDecimal horas;
 
-	//bi-directional many-to-one association to EmpleadoEntity
-	@ManyToOne
-	@JoinColumn(name="CODEMPLEADO")
-	private EmpleadoEntity empleado;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codempleado;
 
-	//bi-directional many-to-one association to ProyectoEntity
-	@ManyToOne
-	@JoinColumn(name="CODPROYECTO")
-	private ProyectoEntity proyecto;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codproyecto;
 
 	public EmpleadocontrolEntity() {
 	}
@@ -69,23 +69,23 @@ public class EmpleadocontrolEntity implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Timestamp getFechacreacion() {
+	public Date getFechacreacion() {
 		return this.fechacreacion;
 	}
 
-	public void setFechacreacion(Timestamp fechacreacion) {
+	public void setFechacreacion(Date fechacreacion) {
 		this.fechacreacion = fechacreacion;
 	}
 
-	public Timestamp getFechahorafin() {
+	public Date getFechahorafin() {
 		return this.fechahorafin;
 	}
 
-	public void setFechahorafin(Timestamp fechahorafin) {
+	public void setFechahorafin(Date fechahorafin) {
 		this.fechahorafin = fechahorafin;
 	}
 
-	public Timestamp getFechahorainicio() {
+	public Date getFechahorainicio() {
 		return this.fechahorainicio;
 	}
 
@@ -93,11 +93,11 @@ public class EmpleadocontrolEntity implements Serializable {
 		this.fechahorainicio = fechahorainicio;
 	}
 
-	public Timestamp getFechamodificacion() {
+	public Date getFechamodificacion() {
 		return this.fechamodificacion;
 	}
 
-	public void setFechamodificacion(Timestamp fechamodificacion) {
+	public void setFechamodificacion(Date fechamodificacion) {
 		this.fechamodificacion = fechamodificacion;
 	}
 
@@ -109,20 +109,20 @@ public class EmpleadocontrolEntity implements Serializable {
 		this.horas = horas;
 	}
 
-	public EmpleadoEntity getEmpleado() {
-		return this.empleado;
+	public Integer getCodempleado() {
+		return this.codempleado;
 	}
 
-	public void setEmpleado(EmpleadoEntity empleado) {
-		this.empleado = empleado;
+	public void setempleado(Integer codempleado) {
+		this.codempleado = codempleado;
 	}
 
-	public ProyectoEntity getProyecto() {
-		return this.proyecto;
+	public Integer getCodproyecto() {
+		return this.codproyecto;
 	}
 
-	public void setProyecto(ProyectoEntity proyecto) {
-		this.proyecto = proyecto;
+	public void setCodproyecto(Integer codproyecto) {
+		this.codproyecto = codproyecto;
 	}
 
 }

@@ -7,10 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 
 /**
@@ -19,7 +17,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="personahabilidad")
-@NamedQuery(name="PersonahabilidadEntity.findAll", query="SELECT p FROM PersonahabilidadEntity p")
 public class PersonahabilidadEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,17 +24,14 @@ public class PersonahabilidadEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@Min(value = 0, message = "Campo requerido")
 	private BigDecimal experienciaanios;
 
-	//bi-directional many-to-one association to HabilidadEntity
-	@ManyToOne
-	@JoinColumn(name="CODHABILIDAD")
-	private HabilidadEntity habilidad;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codhabilidad;
 
-	//bi-directional many-to-one association to PersonaEntity
-	@ManyToOne
-	@JoinColumn(name="CODPERSONA")
-	private PersonaEntity persona;
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codpersona;
 
 	public PersonahabilidadEntity() {
 	}
@@ -58,20 +52,19 @@ public class PersonahabilidadEntity implements Serializable {
 		this.experienciaanios = experienciaanios;
 	}
 
-	public HabilidadEntity getHabilidad() {
-		return this.habilidad;
+	public Integer getCodhabilidad() {
+		return codhabilidad;
 	}
 
-	public void setHabilidad(HabilidadEntity habilidad) {
-		this.habilidad = habilidad;
+	public void setCodhabilidad(Integer codhabilidad) {
+		this.codhabilidad = codhabilidad;
 	}
 
-	public PersonaEntity getPersona() {
-		return this.persona;
+	public Integer getCodpersona() {
+		return codpersona;
 	}
 
-	public void setPersona(PersonaEntity persona) {
-		this.persona = persona;
+	public void setCodpersona(Integer codpersona) {
+		this.codpersona = codpersona;
 	}
-
 }

@@ -6,43 +6,54 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 
 /**
  * The persistent class for the perfilcosto database table.
  * 
  */
 @Entity
-@Table(name = "perfilcosto")
-public class PerfilcostoEntity implements Serializable {
+@Table(name="perfilcosto")
+@IdClass(PerfilcostoPK.class)
+public class PerfilcostoEntity  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfil;
+	
+	@Id
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codlineaproducto;
 
+	@Id
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfiltipo;
+	
+	@Id
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfilnivel;
+	
+	@Min(value = 1, message = "Campo requerido")
+	private BigDecimal valor;
+	
+	@NotBlank(message = "Campo requerido")
 	private String estado;
 
 	@CreationTimestamp
 	@Column(updatable = false)
-	private Timestamp fechaCreacion;
+	private Timestamp fechacreacion;
+
 	@UpdateTimestamp
-	private Timestamp fechaModificacion;
-
-	private BigDecimal valor;
-
-	private Integer codlineaproducto;
-
-	private Integer codperfil;
-
-	private Integer codperfilnivel;
-
-	private Integer codperfiltipo;
+	private Timestamp fechamodificacion;
 
 	public PerfilcostoEntity() {
 	}
@@ -55,20 +66,20 @@ public class PerfilcostoEntity implements Serializable {
 		this.estado = estado;	
 	}
 
-	public Timestamp getFechaCreacion() {
-		return this.fechaCreacion;
+	public Timestamp getFechacreacion() {
+		return this.fechacreacion;
 	}
 
-	public void setFechaCreacion(Timestamp fechacreacion) {
-		this.fechaCreacion = fechacreacion;
+	public void setFechacreacion(Timestamp fechacreacion) {
+		this.fechacreacion = fechacreacion;
 	}
 
-	public Timestamp getFechaModificacion() {
-		return this.fechaModificacion;
+	public Timestamp getFechamodificacion() {
+		return this.fechamodificacion;
 	}
 
-	public void setFechaModificacion(Timestamp fechamodificacion) {
-		this.fechaModificacion = fechamodificacion;
+	public void setFechamodificacion(Timestamp fechamodificacion) {
+		this.fechamodificacion = fechamodificacion;
 	}
 
 	public BigDecimal getValor() {
@@ -79,36 +90,35 @@ public class PerfilcostoEntity implements Serializable {
 		this.valor = valor;
 	}
 
-	public Integer getLineasproducto() {
-		return this.codlineaproducto;
+	public Integer getCodlineaproducto() {
+		return codlineaproducto;
 	}
 
-	public void setLineasproducto(Integer lineasproducto) {
-		this.codlineaproducto = lineasproducto;
+	public void setCodlineaproducto(Integer codlineaproducto) {
+		this.codlineaproducto = codlineaproducto;
 	}
 
-	public Integer getPerfil() {
-		return this.codperfil;
+	public Integer getCodperfil() {
+		return codperfil;
 	}
 
-	public void setPerfil(Integer perfil) {
-		this.codperfil = perfil;
+	public void setCodperfil(Integer codperfil) {
+		this.codperfil = codperfil;
 	}
 
-	public Integer getPerfilnivel() {
-		return this.codperfilnivel;
+	public Integer getCodperfilnivel() {
+		return codperfilnivel;
 	}
 
-	public void setPerfilnivel(Integer perfilnivel) {
-		this.codperfilnivel = perfilnivel;
+	public void setCodperfilnivel(Integer codperfilnivel) {
+		this.codperfilnivel = codperfilnivel;
 	}
 
-	public Integer getPerfiltipo() {
-		return this.codperfiltipo;
+	public Integer getCodperfiltipo() {
+		return codperfiltipo;
 	}
 
-	public void setPerfiltipo(Integer perfiltipo) {
-		this.codperfiltipo = perfiltipo;
+	public void setCodperfiltipo(Integer codperfiltipo) {
+		this.codperfiltipo = codperfiltipo;
 	}
-
 }
