@@ -17,6 +17,8 @@ import javax.validation.constraints.Min;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  * The persistent class for the proyectosolicitudempleado database table.
@@ -28,7 +30,7 @@ public class ProyectosolicitudempleadoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Min(value = 0, message = "Campo requerido")
@@ -124,43 +126,43 @@ public class ProyectosolicitudempleadoEntity implements Serializable {
 		this.porcentajeasignacion = porcentajeasignacion;
 	}
 
-	public Integer getCodlineaproducto() {
-		return codlineaproducto;
+	public Integer getLineasproducto() {
+		return this.codlineaproducto;
 	}
 
-	public void setCodlineaproducto(Integer codlineaproducto) {
-		this.codlineaproducto = codlineaproducto;
+	public void setLineasproducto(Integer lineasproducto) {
+		this.codlineaproducto = lineasproducto;
 	}
 
-	public Integer getCodperfil() {
-		return codperfil;
+	public Integer getPerfil() {
+		return this.codperfil;
 	}
 
-	public void setCodperfil(Integer codperfil) {
-		this.codperfil = codperfil;
+	public void setPerfil(Integer perfil) {
+		this.codperfil = perfil;
 	}
 
-	public Integer getCodperfilnivel() {
-		return codperfilnivel;
+	public Integer getPerfilnivel() {
+		return this.codperfilnivel;
 	}
 
-	public void setCodperfilnivel(Integer codperfilnivel) {
-		this.codperfilnivel = codperfilnivel;
+	public void setPerfilnivel(Integer perfilnivel) {
+		this.codperfilnivel = perfilnivel;
 	}
 
-	public Integer getCodperfiltipo() {
-		return codperfiltipo;
+	public Integer getPerfiltipo() {
+		return this.codperfiltipo;
 	}
 
-	public void setCodperfiltipo(Integer codperfiltipo) {
-		this.codperfiltipo = codperfiltipo;
+	public void setPerfiltipo(Integer perfiltipo) {
+		this.codperfiltipo = perfiltipo;
 	}
 
-	public Integer getCodproyecto() {
-		return codproyecto;
+	public Integer getProyecto() {
+		return this.codproyecto;
 	}
 
-	public void setCodproyecto(Integer codproyecto) {
-		this.codproyecto = codproyecto;
+	public void setProyecto(Integer proyecto) {
+		this.codproyecto = proyecto;
 	}
 }

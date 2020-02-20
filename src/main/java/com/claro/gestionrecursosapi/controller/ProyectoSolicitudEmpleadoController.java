@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.claro.gestionrecursosapi.domain.ProyectoSolicitudEmpleadoService;
+import com.claro.gestionrecursosapi.entity.ProyectosolicitudempleadoEntity;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
-import com.claro.gestionrecursosapi.perfil.domain.PerfilCostoService;
-import com.claro.gestionrecursosapi.perfil.entity.PerfilcostoEntity;
 
 @RestController
-@RequestMapping("/api/v1/perfilcosto")
-public class PerfilCostoController {
+@RequestMapping("/api/v1/proyectosolicitudempleado")
+public class ProyectoSolicitudEmpleadoController {
 
 	@Autowired
-	private PerfilCostoService service;
+	private ProyectoSolicitudEmpleadoService service;
 
 	@GetMapping
 	public ResponseEntity<RespuestaBase> buscarTodo() {
 		try {
-			Iterable<PerfilcostoEntity> listaPerfilesCosto = service.findAll();
-			RespuestaCustomizada<Iterable<PerfilcostoEntity>> respuesta = new RespuestaCustomizada<>();
+			Iterable<ProyectosolicitudempleadoEntity> listaProyectoSolicitud = service.findAll();
+			RespuestaCustomizada<Iterable<ProyectosolicitudempleadoEntity>> respuesta = new RespuestaCustomizada<>();
 
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(listaPerfilesCosto);
+			respuesta.setData(listaProyectoSolicitud);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -46,26 +46,11 @@ public class PerfilCostoController {
 	@GetMapping("/{id}")
 	public ResponseEntity<RespuestaBase> buscarPorId(@PathVariable Integer id) {
 		try {
-			Optional<PerfilcostoEntity> perfilCostoEntity = service.findById(id);
-			RespuestaCustomizada<PerfilcostoEntity> respuesta = new RespuestaCustomizada<>();
+			Optional<ProyectosolicitudempleadoEntity> proyectoSolicitud = service.findById(id);
+			RespuestaCustomizada<ProyectosolicitudempleadoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(perfilCostoEntity.get());
-			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
-		} catch (Exception e) {
-			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
-			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@GetMapping("/estado/{estado}")
-	public ResponseEntity<RespuestaBase> buscarContengaEstado(@PathVariable String estado) {
-		try {
-			Iterable<PerfilcostoEntity> listadoPefilCosto = service.findByEstadoContains(estado);
-			RespuestaCustomizada<Iterable<PerfilcostoEntity>> respuesta = new RespuestaCustomizada<>();
-			respuesta.setCodigoEstatus(HttpStatus.OK.value());
-			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(listadoPefilCosto);
+			respuesta.setData(proyectoSolicitud.get());
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -76,11 +61,11 @@ public class PerfilCostoController {
 	@GetMapping("/perfil/{perfil}")
 	public ResponseEntity<RespuestaBase> buscarPorPefil(@PathVariable int perfil) {
 		try {
-			Iterable<PerfilcostoEntity> listadoPefilCosto = service.findByPerfil(perfil);
-			RespuestaCustomizada<Iterable<PerfilcostoEntity>> respuesta = new RespuestaCustomizada<>();
+			Iterable<ProyectosolicitudempleadoEntity> listaProyectoSolicitud = service.findByPerfil(perfil);
+			RespuestaCustomizada<Iterable<ProyectosolicitudempleadoEntity>> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(listadoPefilCosto);
+			respuesta.setData(listaProyectoSolicitud);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -91,11 +76,11 @@ public class PerfilCostoController {
 	@GetMapping("/perfilnivel/{perfilnivel}")
 	public ResponseEntity<RespuestaBase> buscarPorPefilNivel(@PathVariable int perfilnivel) {
 		try {
-			Iterable<PerfilcostoEntity> listadoPefilCosto = service.findByPerfilNivel(perfilnivel);
-			RespuestaCustomizada<Iterable<PerfilcostoEntity>> respuesta = new RespuestaCustomizada<>();
+			Iterable<ProyectosolicitudempleadoEntity> listaProyectoSolicitud = service.findByPerfilNivel(perfilnivel);
+			RespuestaCustomizada<Iterable<ProyectosolicitudempleadoEntity>> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(listadoPefilCosto);
+			respuesta.setData(listaProyectoSolicitud);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -106,11 +91,12 @@ public class PerfilCostoController {
 	@GetMapping("/lineasproducto/{lineasproducto}")
 	public ResponseEntity<RespuestaBase> buscarPorLineasProducto(@PathVariable int lineasproducto) {
 		try {
-			Iterable<PerfilcostoEntity> listadoPefilCosto = service.findByLineasProducto(lineasproducto);
-			RespuestaCustomizada<Iterable<PerfilcostoEntity>> respuesta = new RespuestaCustomizada<>();
+			Iterable<ProyectosolicitudempleadoEntity> listaProyectoSolicitud = service
+					.findByLineasProducto(lineasproducto);
+			RespuestaCustomizada<Iterable<ProyectosolicitudempleadoEntity>> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(listadoPefilCosto);
+			respuesta.setData(listaProyectoSolicitud);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -121,11 +107,26 @@ public class PerfilCostoController {
 	@GetMapping("/perfiltipo/{perfiltipo}")
 	public ResponseEntity<RespuestaBase> buscarPorPerfilTipo(@PathVariable int perfiltipo) {
 		try {
-			Iterable<PerfilcostoEntity> listadoPefilCosto = service.findByPerfilTipo(perfiltipo);
-			RespuestaCustomizada<Iterable<PerfilcostoEntity>> respuesta = new RespuestaCustomizada<>();
+			Iterable<ProyectosolicitudempleadoEntity> listaProyectoSolicitud = service.findByPerfilTipo(perfiltipo);
+			RespuestaCustomizada<Iterable<ProyectosolicitudempleadoEntity>> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(listadoPefilCosto);
+			respuesta.setData(listaProyectoSolicitud);
+			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
+		} catch (Exception e) {
+			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
+			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping("/proyecto/{proyecto}")
+	public ResponseEntity<RespuestaBase> buscarPorProyecto(@PathVariable int proyecto) {
+		try {
+			Iterable<ProyectosolicitudempleadoEntity> listaProyectoSolicitud = service.findByProyecto(proyecto);
+			RespuestaCustomizada<Iterable<ProyectosolicitudempleadoEntity>> respuesta = new RespuestaCustomizada<>();
+			respuesta.setCodigoEstatus(HttpStatus.OK.value());
+			respuesta.setMensaje("Consulta exitosa");
+			respuesta.setData(listaProyectoSolicitud);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -134,13 +135,13 @@ public class PerfilCostoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<RespuestaBase> crear(@RequestBody PerfilcostoEntity entity) {
+	public ResponseEntity<RespuestaBase> crear(@RequestBody ProyectosolicitudempleadoEntity entity) {
 		try {
-			PerfilcostoEntity perfilCostoEntity = service.save(entity);
-			RespuestaCustomizada<PerfilcostoEntity> respuesta = new RespuestaCustomizada<>();
+			ProyectosolicitudempleadoEntity proyectoSolicitud = service.save(entity);
+			RespuestaCustomizada<ProyectosolicitudempleadoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.CREATED.value());
-			respuesta.setMensaje("Perfil creado");
-			respuesta.setData(perfilCostoEntity);
+			respuesta.setMensaje("Asignación creada");
+			respuesta.setData(proyectoSolicitud);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.CREATED);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
@@ -149,13 +150,13 @@ public class PerfilCostoController {
 	}
 
 	@PutMapping
-	public ResponseEntity<RespuestaBase> actualizar(@RequestBody PerfilcostoEntity entity) {
+	public ResponseEntity<RespuestaBase> actualizar(@RequestBody ProyectosolicitudempleadoEntity entity) {
 		try {
-			PerfilcostoEntity perfilCostoEntity = service.save(entity);
-			RespuestaCustomizada<PerfilcostoEntity> respuesta = new RespuestaCustomizada<>();
+			ProyectosolicitudempleadoEntity proyectoSolicitud = service.save(entity);
+			RespuestaCustomizada<ProyectosolicitudempleadoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Perfil actualizado");
-			respuesta.setData(perfilCostoEntity);
+			respuesta.setData(proyectoSolicitud);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
