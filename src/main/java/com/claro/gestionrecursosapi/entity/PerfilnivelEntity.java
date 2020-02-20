@@ -1,7 +1,7 @@
 package com.claro.gestionrecursosapi.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,18 +28,13 @@ public class PerfilnivelEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@CreationTimestamp
-	@Column(updatable = false)
-	private Timestamp fechaCreacion;
-	@UpdateTimestamp
-	private Timestamp fechaModificacion;
 
 	@CreationTimestamp
 	@Column(updatable = false)
-	private Timestamp fechacreacion;
+	private Date fechacreacion;
 
 	@UpdateTimestamp
-	private Timestamp fechamodificacion;
+	private Date fechamodificacion;
 
 	@Min(value = 1, message = "Campo requerido")
 	private int jerarquia;
@@ -58,20 +53,20 @@ public class PerfilnivelEntity implements Serializable {
 		this.id = id;
 	}
 
-	public Timestamp getFechaCreacion() {
-		return this.fechaCreacion;
+	public Date getFechacreacion() {
+		return this.fechacreacion;
 	}
 
-	public void setFechaCreacion(Timestamp fechacreacion) {
-		this.fechaCreacion = fechacreacion;
+	public void setFechacreacion(Date fechacreacion) {
+		this.fechacreacion = fechacreacion;
 	}
 
-	public Timestamp getFechaModificacion() {
-		return this.fechaModificacion;
+	public Date getFechamodificacion() {
+		return this.fechamodificacion;
 	}
 
-	public void setFechaModificacion(Timestamp fechamodificacion) {
-		this.fechaModificacion = fechamodificacion;
+	public void setFechamodificacion(Date fechamodificacion) {
+		this.fechamodificacion = fechamodificacion;
 	}
 
 	public int getJerarquia() {

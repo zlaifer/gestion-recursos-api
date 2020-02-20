@@ -1,7 +1,6 @@
 package com.claro.gestionrecursosapi.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -37,13 +36,13 @@ public class EmpleadoEntity implements Serializable {
 
 	@CreationTimestamp
 	@Column(updatable = false)
-	private Timestamp fechacreacion;
+	private Date fechacreacion;
 
 	@Temporal(TemporalType.DATE)
 	private Date fechaingreso;
 
 	@UpdateTimestamp
-	private Timestamp fechamodificacion;
+	private Date fechamodificacion;
 
 	@NotBlank(message = "Campo requerido")
 	private String usuarioclaro;
@@ -97,11 +96,11 @@ public class EmpleadoEntity implements Serializable {
 		this.codcentrocosto = codcentrocosto;
 	}
 
-	public Timestamp getFechacreacion() {
+	public Date getFechacreacion() {
 		return this.fechacreacion;
 	}
 
-	public void setFechacreacion(Timestamp fechacreacion) {
+	public void setFechacreacion(Date fechacreacion) {
 		this.fechacreacion = fechacreacion;
 	}
 
@@ -113,11 +112,11 @@ public class EmpleadoEntity implements Serializable {
 		this.fechaingreso = fechaingreso;
 	}
 
-	public Timestamp getFechamodificacion() {
+	public Date getFechamodificacion() {
 		return this.fechamodificacion;
 	}
 
-	public void setFechamodificacion(Timestamp fechamodificacion) {
+	public void setFechamodificacion(Date fechamodificacion) {
 		this.fechamodificacion = fechamodificacion;
 	}
 

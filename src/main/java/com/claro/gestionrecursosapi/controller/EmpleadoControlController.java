@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.claro.gestionrecursosapi.domain.PresupuestoService;
-import com.claro.gestionrecursosapi.entity.PresupuestoEntity;
+import com.claro.gestionrecursosapi.domain.EmpleadoControlService;
+import com.claro.gestionrecursosapi.entity.EmpleadocontrolEntity;
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
 
 @RestController
-@RequestMapping("/api/v1/presupuesto")
-public class PresupuestoController {
+@RequestMapping("/api/v1/empleadocontrol")
+public class EmpleadoControlController {
 
 	@Autowired
-	private PresupuestoService service;
-
+	private EmpleadoControlService service;
+	
 	@GetMapping
 	public ResponseEntity<RespuestaBase> buscarTodo() {
 		try {
-			Iterable<PresupuestoEntity> listasPersonas = service.findAll();
-			RespuestaCustomizada<Iterable<PresupuestoEntity>> respuesta = new RespuestaCustomizada<>();
+			Iterable<EmpleadocontrolEntity> listaPerfileNivel = service.findAll();
+			RespuestaCustomizada<Iterable<EmpleadocontrolEntity>> respuesta = new RespuestaCustomizada<>();
 
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(listasPersonas);
+			respuesta.setData(listaPerfileNivel);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -42,60 +42,54 @@ public class PresupuestoController {
 		}
 
 	}
-
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<RespuestaBase> buscarPorId(@PathVariable Integer id) {
 		try {
-			Optional<PresupuestoEntity> personaEntity = service.findById(id);
-			RespuestaCustomizada<PresupuestoEntity> respuesta = new RespuestaCustomizada<>();
+			Optional<EmpleadocontrolEntity> EmpleadocontrolEntity = service.findById(id);
+			RespuestaCustomizada<EmpleadocontrolEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(personaEntity.get());
+			respuesta.setData(EmpleadocontrolEntity.get());
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
 			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
 		}
 	}
-
+	
 	@PostMapping
-	public ResponseEntity<RespuestaBase> crear(@RequestBody PresupuestoEntity entity) {
+	public ResponseEntity<RespuestaBase> crear(@RequestBody EmpleadocontrolEntity entity) {
 		try {
-			PresupuestoEntity personaEntity = service.save(entity);
-			
-			RespuestaCustomizada<PresupuestoEntity> respuesta = new RespuestaCustomizada<>();
+			EmpleadocontrolEntity EmpleadocontrolEntity = service.save(entity);
+			RespuestaCustomizada<EmpleadocontrolEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.CREATED.value());
-			respuesta.setMensaje("Presupuesto creada");
-			respuesta.setData(personaEntity);
+			respuesta.setMensaje("PerfilNivel creado");
+			respuesta.setData(EmpleadocontrolEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.CREATED);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
 			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
 		}
 	}
-
+	
 	@PutMapping("/{id}")
-	public ResponseEntity<RespuestaBase> actualizar(@PathVariable Integer id, @RequestBody PresupuestoEntity entity) {
+	public ResponseEntity<RespuestaBase> actualizar(@PathVariable Integer id, @RequestBody EmpleadocontrolEntity entity) {
 		try {
-			PresupuestoEntity personaEntity = service.save(entity);
-			RespuestaCustomizada<PresupuestoEntity> respuesta = new RespuestaCustomizada<>();
+			EmpleadocontrolEntity EmpleadocontrolEntity = service.save(entity);
+			RespuestaCustomizada<EmpleadocontrolEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
-			respuesta.setMensaje("Presupuesto actualizado");
-			respuesta.setData(personaEntity);
+			respuesta.setMensaje("Empleado Control actualizado");
+			respuesta.setData(EmpleadocontrolEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
 			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
 		}
-		/*} catch (NoExisteExcepcion e) {
-			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
-			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
-		}*/
 	}
-
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<RespuestaBase> eliminar(@PathVariable Integer id) {
-
 		try {
 			service.delete(service.findById(id).get());
 			RespuestaBase respuesta = new RespuestaBase();
@@ -106,7 +100,5 @@ public class PresupuestoController {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
 			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
 		}
-
 	}
 }
-

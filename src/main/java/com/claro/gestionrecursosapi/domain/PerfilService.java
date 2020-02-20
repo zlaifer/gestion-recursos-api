@@ -18,6 +18,7 @@ public class PerfilService implements ICrudService<PerfilEntity, Integer> {
 
 	@Override
 	public PerfilEntity save(PerfilEntity entity) {
+		entity.setEstado("A");
 		return repository.save(entity);
 	}
 

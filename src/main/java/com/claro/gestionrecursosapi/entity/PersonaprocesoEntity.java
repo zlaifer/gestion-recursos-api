@@ -1,6 +1,5 @@
 package com.claro.gestionrecursosapi.entity;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -21,12 +20,19 @@ import org.hibernate.annotations.UpdateTimestamp;
  */
 @Entity
 @Table(name="personaproceso")
-public class PersonaprocesoEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class PersonaprocesoEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codpersona;
+	
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codprocesoestado;
+
+	private String observacion;
 
 	@CreationTimestamp
 	@Column(updatable = false)
@@ -34,15 +40,7 @@ public class PersonaprocesoEntity implements Serializable {
 
 	@UpdateTimestamp
 	private Timestamp fechamodificacion;
-
-	private String observacion;
-
-	@Min(value = 1, message = "Campo requerido")
-	private PersonaEntity codpersona;
-
-	@Min(value = 1, message = "Campo requerido")
-	private ProcesoestadoEntity codprocesoestado;
-
+	
 	public PersonaprocesoEntity() {
 	}
 
@@ -78,19 +76,19 @@ public class PersonaprocesoEntity implements Serializable {
 		this.observacion = observacion;
 	}
 
-	public PersonaEntity getCodpersona() {
+	public Integer getCodpersona() {
 		return codpersona;
 	}
 
-	public void setCodpersona(PersonaEntity codpersona) {
+	public void setCodpersona(Integer codpersona) {
 		this.codpersona = codpersona;
 	}
 
-	public ProcesoestadoEntity getCodprocesoestado() {
+	public Integer getCodprocesoestado() {
 		return codprocesoestado;
 	}
 
-	public void setCodprocesoestado(ProcesoestadoEntity codprocesoestado) {
+	public void setCodprocesoestado(Integer codprocesoestado) {
 		this.codprocesoestado = codprocesoestado;
 	}
 }

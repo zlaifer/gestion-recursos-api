@@ -1,7 +1,7 @@
 package com.claro.gestionrecursosapi.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,16 +29,10 @@ public class PerfiltipoEntity implements Serializable {
 	private int id;
 	@CreationTimestamp
 	@Column(updatable = false)
-	private Timestamp fechaCreacion;
-	@UpdateTimestamp
-	private Timestamp fechaModificacion;
-
-	@CreationTimestamp
-	@Column(updatable = false)
-	private Timestamp fechacreacion;
+	private Date fechacreacion;
 
 	@UpdateTimestamp
-	private Timestamp fechamodificacion;
+	private Date fechamodificacion;
 
 	@NotBlank(message = "Campo requerido")
 	private String nombre;
@@ -54,20 +48,20 @@ public class PerfiltipoEntity implements Serializable {
 		this.id = id;
 	}
 
-	public Timestamp getFechaCreacion() {
-		return this.fechaCreacion;
+	public Date getFechacreacion() {
+		return this.fechacreacion;
 	}
 
-	public void setFechaCreacion(Timestamp fechacreacion) {
-		this.fechaCreacion = fechacreacion;
+	public void setFechacreacion(Date fechacreacion) {
+		this.fechacreacion = fechacreacion;
 	}
 
-	public Timestamp getFechaModificacion() {
-		return this.fechaModificacion;
+	public Date getFechamodificacion() {
+		return this.fechamodificacion;
 	}
 
-	public void setFechaModificacion(Timestamp fechamodificacion) {
-		this.fechaModificacion = fechamodificacion;
+	public void setFechamodificacion(Date fechamodificacion) {
+		this.fechamodificacion = fechamodificacion;
 	}
 
 	public String getNombre() {

@@ -1,48 +1,33 @@
 package com.claro.gestionrecursosapi.entity;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-/**
- * The persistent class for the tipodocumento database table.
- * 
- */
 @Entity
 @Table(name = "tipodocumento")
-public class TipodocumentoEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class TipoDocumentoEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-
+	private Integer id;
+	private String nombre;	
 	private String descripcion;
-
 	@CreationTimestamp
 	@Column(updatable = false)
-	private Timestamp fechacreacion;
-
+	private Date fechacreacion;
 	@UpdateTimestamp
-	private Timestamp fechamodificacion;
+	private Date fechamodificacion;
 
-	@NotBlank(message = "Campo requerido")
-	private String nombre;
-
-	public TipodocumentoEntity() {
+	public TipoDocumentoEntity() {
 	}
 
 	public int getId() {
@@ -61,19 +46,19 @@ public class TipodocumentoEntity implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Timestamp getFechacreacion() {
+	public Date getFechacreacion() {
 		return this.fechacreacion;
 	}
 
-	public void setFechacreacion(Timestamp fechacreacion) {
+	public void setFechacreacion(Date fechacreacion) {
 		this.fechacreacion = fechacreacion;
 	}
 
-	public Timestamp getFechamodificacion() {
+	public Date getFechamodificacion() {
 		return this.fechamodificacion;
 	}
 
-	public void setFechamodificacion(Timestamp fechamodificacion) {
+	public void setFechamodificacion(Date fechamodificacion) {
 		this.fechamodificacion = fechamodificacion;
 	}
 

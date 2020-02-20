@@ -1,8 +1,8 @@
 package com.claro.gestionrecursosapi.entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,8 +22,7 @@ import org.hibernate.annotations.UpdateTimestamp;
  */
 @Entity
 @Table(name="empleadocontrol")
-public class EmpleadocontrolEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class EmpleadocontrolEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,14 +32,14 @@ public class EmpleadocontrolEntity implements Serializable {
 
 	@CreationTimestamp
 	@Column(updatable = false)
-	private Timestamp fechacreacion;
+	private Date fechacreacion;
 
-	private Timestamp fechahorafin;
+	private Date fechahorafin;
 
-	private Timestamp fechahorainicio;
+	private Date fechahorainicio;
 	
 	@UpdateTimestamp
-	private Timestamp fechamodificacion;
+	private Date fechamodificacion;
 
 	@Min(value = 1, message = "Campo requerido")
 	private BigDecimal horas;
@@ -70,23 +69,23 @@ public class EmpleadocontrolEntity implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Timestamp getFechacreacion() {
+	public Date getFechacreacion() {
 		return this.fechacreacion;
 	}
 
-	public void setFechacreacion(Timestamp fechacreacion) {
+	public void setFechacreacion(Date fechacreacion) {
 		this.fechacreacion = fechacreacion;
 	}
 
-	public Timestamp getFechahorafin() {
+	public Date getFechahorafin() {
 		return this.fechahorafin;
 	}
 
-	public void setFechahorafin(Timestamp fechahorafin) {
+	public void setFechahorafin(Date fechahorafin) {
 		this.fechahorafin = fechahorafin;
 	}
 
-	public Timestamp getFechahorainicio() {
+	public Date getFechahorainicio() {
 		return this.fechahorainicio;
 	}
 
@@ -94,11 +93,11 @@ public class EmpleadocontrolEntity implements Serializable {
 		this.fechahorainicio = fechahorainicio;
 	}
 
-	public Timestamp getFechamodificacion() {
+	public Date getFechamodificacion() {
 		return this.fechamodificacion;
 	}
 
-	public void setFechamodificacion(Timestamp fechamodificacion) {
+	public void setFechamodificacion(Date fechamodificacion) {
 		this.fechamodificacion = fechamodificacion;
 	}
 
@@ -110,19 +109,19 @@ public class EmpleadocontrolEntity implements Serializable {
 		this.horas = horas;
 	}
 
-	public Integer getCodEmpleado() {
+	public Integer getCodempleado() {
 		return this.codempleado;
 	}
 
-	public void setEmpleado(Integer codempleado) {
+	public void setempleado(Integer codempleado) {
 		this.codempleado = codempleado;
 	}
 
-	public Integer getProyecto() {
+	public Integer getCodproyecto() {
 		return this.codproyecto;
 	}
 
-	public void setCodProyecto(Integer codproyecto) {
+	public void setCodproyecto(Integer codproyecto) {
 		this.codproyecto = codproyecto;
 	}
 

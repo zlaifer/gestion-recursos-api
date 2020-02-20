@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -20,9 +22,29 @@ import org.hibernate.annotations.UpdateTimestamp;
  */
 @Entity
 @Table(name="perfilcosto")
-public class PerfilcostoEntity implements Serializable {
+@IdClass(PerfilcostoPK.class)
+public class PerfilcostoEntity  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfil;
+	
+	@Id
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codlineaproducto;
+
+	@Id
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfiltipo;
+	
+	@Id
+	@Min(value = 1, message = "Campo requerido")
+	private Integer codperfilnivel;
+	
+	@Min(value = 1, message = "Campo requerido")
+	private BigDecimal valor;
+	
 	@NotBlank(message = "Campo requerido")
 	private String estado;
 
@@ -32,21 +54,6 @@ public class PerfilcostoEntity implements Serializable {
 
 	@UpdateTimestamp
 	private Timestamp fechamodificacion;
-
-	@Min(value = 1, message = "Campo requerido")
-	private BigDecimal valor;
-
-	@Min(value = 1, message = "Campo requerido")
-	private Integer codlineaproducto;
-
-	@Min(value = 1, message = "Campo requerido")
-	private Integer codperfil;
-
-	@Min(value = 1, message = "Campo requerido")
-	private Integer codperfilnivel;
-
-	@Min(value = 1, message = "Campo requerido")
-	private Integer codperfiltipo;
 
 	public PerfilcostoEntity() {
 	}

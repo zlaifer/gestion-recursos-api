@@ -3,9 +3,9 @@ package com.claro.gestionrecursosapi.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.claro.gestionrecursosapi.entity.ProyectoEntity;
+import com.claro.gestionrecursosapi.entity.EmpleadocontrolEntity;
 
 @Repository
-public interface IProyectoRepository extends CrudRepository<ProyectoEntity, Integer> {
+public interface IEmpleadoControlRepository extends CrudRepository<EmpleadocontrolEntity, Integer> {
 
 }

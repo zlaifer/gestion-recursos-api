@@ -163,10 +163,4 @@ public class PersonaEntity {
 	public void setFechamodificacion(Date fechamodificacion) {
 		this.fechamodificacion = fechamodificacion;
 	}
-			
-	public boolean isIncorrectData() {
-		return getCodtipodocumento() <= 0 || getNumerodocumento() <= 0L	
-				|| getNombre1() == null || getApellido1() == null 
-				|| getApellido2() == null;
-	}
 }
