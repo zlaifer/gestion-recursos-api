@@ -16,25 +16,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.claro.gestionrecursosapi.model.RespuestaBase;
 import com.claro.gestionrecursosapi.model.RespuestaCustomizada;
-import com.claro.gestionrecursosapi.proyecto.domain.ProyectoService;
-import com.claro.gestionrecursosapi.proyecto.entity.ProyectoEntity;
+import com.claro.gestionrecursosapi.persona.domain.PersonaAusenciaTipoService;
+import com.claro.gestionrecursosapi.persona.entity.PersonaausenciatipoEntity;
 
 @RestController
-@RequestMapping("/api/v1/proyecto")
-public class ProyectoController {
+@RequestMapping("/api/v1/presonaausenciatipo")
+public class PersonaAusenciaTipoController {
 
 	@Autowired
-	private ProyectoService service;
-
+	private PersonaAusenciaTipoService service;
+	
 	@GetMapping
 	public ResponseEntity<RespuestaBase> buscarTodo() {
 		try {
-			Iterable<ProyectoEntity> listasPersonas = service.findAll();
-			RespuestaCustomizada<Iterable<ProyectoEntity>> respuesta = new RespuestaCustomizada<>();
+			Iterable<PersonaausenciatipoEntity> listaPersonaAusencia = service.findAll();
+			RespuestaCustomizada<Iterable<PersonaausenciatipoEntity>> respuesta = new RespuestaCustomizada<>();
 
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(listasPersonas);
+			respuesta.setData(listaPersonaAusencia);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -46,11 +46,11 @@ public class ProyectoController {
 	@GetMapping("/{id}")
 	public ResponseEntity<RespuestaBase> buscarPorId(@PathVariable Integer id) {
 		try {
-			Optional<ProyectoEntity> personaEntity = service.findById(id);
-			RespuestaCustomizada<ProyectoEntity> respuesta = new RespuestaCustomizada<>();
+			Optional<PersonaausenciatipoEntity> PersonaausenciatipoEntity = service.findById(id);
+			RespuestaCustomizada<PersonaausenciatipoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
 			respuesta.setMensaje("Consulta exitosa");
-			respuesta.setData(personaEntity.get());
+			respuesta.setData(PersonaausenciatipoEntity.get());
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
@@ -59,14 +59,14 @@ public class ProyectoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<RespuestaBase> crear(@RequestBody ProyectoEntity entity) {
+	public ResponseEntity<RespuestaBase> crear(@RequestBody PersonaausenciatipoEntity entity) {
 		try {
-			ProyectoEntity personaEntity = service.save(entity);
-			
-			RespuestaCustomizada<ProyectoEntity> respuesta = new RespuestaCustomizada<>();
+			PersonaausenciatipoEntity PersonaausenciatipoEntity = service.save(entity);
+
+			RespuestaCustomizada<PersonaausenciatipoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.CREATED.value());
-			respuesta.setMensaje("Proyecto creado");
-			respuesta.setData(personaEntity);
+			respuesta.setMensaje("Tipo de ausencia creada");
+			respuesta.setData(PersonaausenciatipoEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.CREATED);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
@@ -75,22 +75,19 @@ public class ProyectoController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<RespuestaBase> actualizar(@PathVariable Integer id, @RequestBody ProyectoEntity entity) {
+	public ResponseEntity<RespuestaBase> actualizar(@PathVariable Integer id,
+			@RequestBody PersonaausenciatipoEntity entity) {
 		try {
-			ProyectoEntity personaEntity = service.save(entity);
-			RespuestaCustomizada<ProyectoEntity> respuesta = new RespuestaCustomizada<>();
+			PersonaausenciatipoEntity PersonaausenciatipoEntity = service.save(entity);
+			RespuestaCustomizada<PersonaausenciatipoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
-			respuesta.setMensaje("Proyecto actualizado");
-			respuesta.setData(personaEntity);
+			respuesta.setMensaje("Tipoo de ausencia actualizada");
+			respuesta.setData(PersonaausenciatipoEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
 			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.CONFLICT.value(), e.getMessage());
 			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.CONFLICT);
 		}
-		/*} catch (NoExisteExcepcion e) {
-			RespuestaBase respuestaBase = new RespuestaBase(HttpStatus.NOT_FOUND.value(), e.getMessage());
-			return new ResponseEntity<RespuestaBase>(respuestaBase, HttpStatus.NOT_FOUND);
-		}*/
 	}
 
 	@DeleteMapping("/{id}")

@@ -64,7 +64,7 @@ public class EmpleadoControlController {
 			EmpleadocontrolEntity EmpleadocontrolEntity = service.save(entity);
 			RespuestaCustomizada<EmpleadocontrolEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.CREATED.value());
-			respuesta.setMensaje("PerfilNivel creado");
+			respuesta.setMensaje("Empleado control creado");
 			respuesta.setData(EmpleadocontrolEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.CREATED);
 		} catch (Exception e) {

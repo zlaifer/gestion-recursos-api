@@ -65,7 +65,7 @@ public class EstructuraTipoController {
 
 			RespuestaCustomizada<EstructuratipoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.CREATED.value());
-			respuesta.setMensaje("Persona creada");
+			respuesta.setMensaje("Se creo correctamente");
 			respuesta.setData(estructuraEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ public class EstructuraTipoController {
 			EstructuratipoEntity estructuraEntity = service.save(entity);
 			RespuestaCustomizada<EstructuratipoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
-			respuesta.setMensaje("Proyecto actualizado");
+			respuesta.setMensaje("Se actualizo correctamento");
 			respuesta.setData(estructuraEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
