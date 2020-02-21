@@ -139,7 +139,7 @@ public class PerfilCostoController {
 			PerfilcostoEntity perfilCostoEntity = service.save(entity);
 			RespuestaCustomizada<PerfilcostoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.CREATED.value());
-			respuesta.setMensaje("Perfil creado");
+			respuesta.setMensaje("Se creo correctamente");
 			respuesta.setData(perfilCostoEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -154,7 +154,7 @@ public class PerfilCostoController {
 			PerfilcostoEntity perfilCostoEntity = service.save(entity);
 			RespuestaCustomizada<PerfilcostoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
-			respuesta.setMensaje("Perfil actualizado");
+			respuesta.setMensaje("Se actualizo correctamente");
 			respuesta.setData(perfilCostoEntity);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {

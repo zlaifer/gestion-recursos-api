@@ -140,7 +140,7 @@ public class ProyectoSolicitudEmpleadoController {
 			ProyectosolicitudempleadoEntity proyectoSolicitud = service.save(entity);
 			RespuestaCustomizada<ProyectosolicitudempleadoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.CREATED.value());
-			respuesta.setMensaje("Asignación creada");
+			respuesta.setMensaje("Solicitud creada");
 			respuesta.setData(proyectoSolicitud);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -155,7 +155,7 @@ public class ProyectoSolicitudEmpleadoController {
 			ProyectosolicitudempleadoEntity proyectoSolicitud = service.save(entity);
 			RespuestaCustomizada<ProyectosolicitudempleadoEntity> respuesta = new RespuestaCustomizada<>();
 			respuesta.setCodigoEstatus(HttpStatus.OK.value());
-			respuesta.setMensaje("Perfil actualizado");
+			respuesta.setMensaje("Soliciutd actualizada");
 			respuesta.setData(proyectoSolicitud);
 			return new ResponseEntity<RespuestaBase>(respuesta, HttpStatus.OK);
 		} catch (Exception e) {
