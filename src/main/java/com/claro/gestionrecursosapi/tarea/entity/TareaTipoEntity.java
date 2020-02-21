@@ -24,6 +24,7 @@ public class TareaTipoEntity {
 	private String nombre;
 	private String descripcion;
 	private Integer jerarquia;
+	private String color;
 	@CreationTimestamp
 	@Column(updatable = false)
 	private Date fechacreacion;
@@ -53,6 +54,12 @@ public class TareaTipoEntity {
 	}
 	public void setJerarquia(Integer jerarquia) {
 		this.jerarquia = jerarquia;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
 	}
 	public Date getFechacreacion() {
 		return fechacreacion;

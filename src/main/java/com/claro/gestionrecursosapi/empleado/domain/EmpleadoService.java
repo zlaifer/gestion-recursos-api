@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 
 import com.claro.gestionrecursosapi.domain.ICrudService;
 import com.claro.gestionrecursosapi.empleado.entity.EmpleadoEntity;
-import com.claro.gestionrecursosapi.repository.IEmpleadoRepository;
+import com.claro.gestionrecursosapi.empleado.repository.IEmpleadoRepository;
 
 @Service
 @Validated
@@ -64,6 +64,10 @@ public class EmpleadoService implements ICrudService<EmpleadoEntity, Integer> {
 	@Override
 	public boolean existsById(Integer id) {
 		return repository.existsById(id);
+	}
+	
+	public EmpleadoEntity findByCodPersona(Integer codpersona) {
+		return repository.findByCodPersona(codpersona);
 	}
 	
 	public EmpleadoEntity findByUsuarioclaro(String usuarioClaro) {

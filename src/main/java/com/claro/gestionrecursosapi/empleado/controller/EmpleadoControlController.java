@@ -1,4 +1,4 @@
-package com.claro.gestionrecursosapi.controller;
+package com.claro.gestionrecursosapi.empleado.controller;
 
 import java.util.Optional;
 

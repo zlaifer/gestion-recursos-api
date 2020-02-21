@@ -25,6 +25,7 @@ public class TareaEntity {
 	private Integer codtareaestado;
 	private Integer codempleadocreo;
 	private Integer codempleadoasignado;
+	private Integer codproyecto;
 	@NotBlank(message = "Campo requerido")
 	private String jerarquia;
 	@NotBlank(message = "Campo requerido")
@@ -76,6 +77,12 @@ public class TareaEntity {
 	}
 	public void setCodempleadoasignado(Integer codempleadoasignado) {
 		this.codempleadoasignado = codempleadoasignado;
+	}
+	public Integer getCodproyecto() {
+		return codproyecto;
+	}
+	public void setCodproyecto(Integer codproyecto) {
+		this.codproyecto = codproyecto;
 	}
 	public String getJerarquia() {
 		return jerarquia;
